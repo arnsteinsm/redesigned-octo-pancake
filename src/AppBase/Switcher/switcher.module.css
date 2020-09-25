@@ -1,0 +1,59 @@
+.switcher {
+  padding: 0;
+}
+
+.buttonContainer {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  padding: 10px;
+  justify-content: center;
+}
+
+.iconButtonWrapper {
+  margin: 0 35px 50px 35px;
+  width: 100px;
+}
+
+.iconButton {
+  height: 100px;
+  width: 100px;
+  border-radius: 23%;
+  border: 0;
+  background: #4ca1af;
+  background: -webkit-linear-gradient(to right, #c4e0e5, #4ca1af);
+  background: linear-gradient(to right, #c4e0e5, #4ca1af);
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
+}
+
+.iconButton:disabled {
+  opacity: 50%;
+}
+
+.iconButtonLabel {
+  text-align: center;
+  display: block;
+  font-weight: 300;
+}
+
+.flexRow {
+  display: flex;
+  justify-content: center;
+}
+
+.profilePicture {
+  margin-top: 39px;
+  border-radius: 130px;
+  height: 130px;
+  width: 130px;
+}
+
+.profileText {
+  font-weight: 500;
+  margin: 13px 0 0 0;
+}
+
+@media (max-width: 768px) {
+  .buttonContainer {
+    grid-template-columns: auto auto;
+  }
+}
