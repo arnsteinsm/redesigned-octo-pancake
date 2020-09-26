@@ -20,7 +20,7 @@ const useFetchers = () => {
     key: String(apiCredentials?.['X-MyBring-API-Key']),
   });
 
-  const fetchOrdre = async (orderID: string) => {
+  const fetchOrder = async (orderID: string) => {
     return axios
       .get<OrderInfo>(`${nettButikkBaseURL}/orders/${orderID}${wordpressQuery}`)
       .then((res) => res.data)
@@ -73,7 +73,7 @@ const useFetchers = () => {
       });
 
   return {
-    fetchOrdre,
+    fetchOrder,
     fetchOrdreNotes,
     updateOrder,
     getBringBooking,

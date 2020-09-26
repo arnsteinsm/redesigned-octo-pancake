@@ -4,7 +4,7 @@ import { OrderInfo } from '../../Types/order';
 import useFetchers from '../../hooks/useFetchers';
 
 const useGenerateShippingLabel = () => {
-  const { showAppAsLoading, resetApp } = useAppActions();
+  const { showAppLoading, resetApp } = useAppActions();
   const { getBringBooking, updateOrder, makeOrderNote } = useFetchers();
 
   const moveToFullfort = (
@@ -87,7 +87,7 @@ const useGenerateShippingLabel = () => {
   };
 
   return (orderJson: OrderInfo, antallKolli: number) => {
-    showAppAsLoading();
+    showAppLoading();
 
     getBringBooking(getBringBookingConfig(orderJson, antallKolli, false)).then(
       (data) => {

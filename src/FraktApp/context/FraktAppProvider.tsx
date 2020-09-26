@@ -16,17 +16,13 @@ const initialState: FraktAppState = {
     showResetOrderButtonRow: false,
     showResetAppRow: false,
   },
-  inputState: {
-    orderID: '',
-    numberOfPackages: '',
-  },
 };
 
 export const FraktAppContext = createContext({} as ContextProps);
 
 const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
   switch (action.type) {
-    case 'SET_APP_LOADING':
+    case 'SHOW_APP_LOADING':
       return {
         ...state,
         visibleComponents: {
@@ -40,7 +36,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         },
       };
 
-    case 'SET_ORDER_LOADED':
+    case 'SHOW_ORDER_LOADED':
       return {
         ...state,
         visibleComponents: {
@@ -51,19 +47,20 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
           showNumberOfPackagesInputRow: true,
           showResetOrderButtonRow: false,
           showResetAppRow: true,
+          showActionsRow: false,
         },
         orderInfo: action.payload,
         actionDescription: 'Legg inn antall kolli:',
       };
 
-    case 'NUMBER_OF_PACKAGE_SELECTED':
+    case 'SHOW_FINAL_ACTIONS':
       return {
         ...state,
         visibleComponents: {
           ...state.visibleComponents,
           showOrderInfoRow: true,
           showActionDescriptionRow: true,
-          showNumberOfPackagesInputRow: false,
+          showNumberOfPackagesInputRow: true,
           showActionsRow: true,
         },
         actionDescription: '',
@@ -82,7 +79,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         },
       };
 
-    case 'SET_OTHER_ORDER_STATUS_ACTION':
+    case 'SHOW_OTHER_ORDER_STATUS':
       return {
         ...state,
         visibleComponents: {
@@ -98,7 +95,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         actionDescription: action.payload?.text,
       };
 
-    case 'SET_ORDER_ID_INPUT':
+    case 'SET_ORDER_ID':
       return {
         ...state,
         inputState: {
@@ -107,7 +104,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         },
       };
 
-    case 'SET_NUMBER_OF_PACKAGES_ID_INPUT':
+    case 'SET_NUMBER_OF_PACKAGES':
       return {
         ...state,
         inputState: {

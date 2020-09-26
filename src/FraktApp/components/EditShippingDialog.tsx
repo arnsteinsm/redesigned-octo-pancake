@@ -37,9 +37,7 @@ const EditShippingDialog: React.FunctionComponent<Props> = ({
       setInputValue(state.orderInfo?.shipping.postcode);
     } else if (selectedEditOption === EditOptions.NAVN) {
       setInputValue(
-        state.orderInfo?.shipping.first_name +
-          ' ' +
-          state.orderInfo?.shipping.last_name
+        `${state.orderInfo?.shipping.first_name} ${state.orderInfo?.shipping.last_name}`
       );
     }
   }, [

@@ -11,7 +11,7 @@ import useLoadOrder from '../hooks/useLoadOrder';
 const OrderNumberInputRow: React.FunctionComponent = () => {
   const { state } = useContext(FraktAppContext);
 
-  const { setOrderID } = useAppActions();
+  const { setOrderId } = useAppActions();
   const loadOrder = useLoadOrder();
 
   return (
@@ -20,15 +20,15 @@ const OrderNumberInputRow: React.FunctionComponent = () => {
         <FormControl
           type="text"
           placeholder="Legg inn ordrenr"
-          value={state.inputState.orderID}
-          onChange={(event) => setOrderID(event.currentTarget.value)}
+          value={state?.inputState?.orderID}
+          onChange={(event) => setOrderId(event.currentTarget.value)}
         />
         <InputGroup.Append>
           <Button
             variant="outline-success"
             id="findOrderButton"
-            onClick={() => loadOrder(state.inputState.orderID)}
-            disabled={!state.inputState.orderID.length}
+            onClick={() => loadOrder(state?.inputState?.orderID)}
+            disabled={!state?.inputState?.orderID?.length}
           >
             Finn ordre!
           </Button>

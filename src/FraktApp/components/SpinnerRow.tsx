@@ -1,17 +1,17 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
-//@ts-ignore
-import Loader from '../loader.gif';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const SpinnerRow = () => (
-  <Row id="spinnerArea" className="mr-1 ml-1">
-    <img
-      className="rounded mx-auto d-block"
-      height="100px"
-      width="100px"
-      src={Loader}
-      alt="Spinner"
-    />
+  <Row
+    id="spinnerArea"
+    className="mr-1 ml-1 mt-4"
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+    }}
+  >
+    <CircularProgress size={100} thickness={4} />
   </Row>
 );
 

@@ -1,8 +1,8 @@
 import useFetchers from '../../hooks/useFetchers';
 import useAppActions from './useAppActions';
 
-const useResetOrdre = (orderID?: number) => {
-  const { resetApp, showAppAsLoading } = useAppActions();
+const useResetOrder = (orderID?: number) => {
+  const { resetApp, showAppLoading } = useAppActions();
   const { updateOrder } = useFetchers();
 
   if (!orderID) return null;
@@ -28,7 +28,7 @@ const useResetOrdre = (orderID?: number) => {
                 ' du ønsker å tilbakestille'
             )
           ) {
-            showAppAsLoading();
+            showAppLoading();
 
             updateOrder(orderIDString, 'klar-for-pakking').then((res) => {
               if (res) {
@@ -53,4 +53,4 @@ const useResetOrdre = (orderID?: number) => {
   };
 };
 
-export default useResetOrdre;
+export default useResetOrder;

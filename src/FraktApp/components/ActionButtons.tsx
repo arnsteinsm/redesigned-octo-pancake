@@ -4,24 +4,21 @@ import useGenerateShippingLabel from '../hooks/useGenerateShippingLabel';
 import { FraktAppContext } from '../context/FraktAppProvider';
 import EditShippingDialog from './EditShippingDialog';
 
-//import { newPdfBrowser } from '../utils/pdfWindow';
-
 const ActionsRow: React.FunctionComponent = () => {
   const { state } = useContext(FraktAppContext);
   const generateShippingLabel = useGenerateShippingLabel();
   const { orderInfo } = state;
-  const numberOfPackages = parseInt(state.inputState.numberOfPackages);
+
+  const numberOfPackages = state?.inputState?.numberOfPackages;
 
   const [editShippingDialogOpen, setEditShippingDialogOpen] = useState(false);
 
-  const handleEditShippingDialogClose = () => setEditShippingDialogOpen(false);
-
-  if (orderInfo && !isNaN(numberOfPackages)) {
+  if (orderInfo && numberOfPackages && !isNaN(numberOfPackages)) {
     return (
-      <div style={{ marginTop: '70px' }}>
+      <>
         <EditShippingDialog
           open={editShippingDialogOpen}
-          handleClose={handleEditShippingDialogClose}
+          handleClose={() => setEditShippingDialogOpen(false)}
         />
         <BlockButtonRow
           rowId="row6"
@@ -37,7 +34,7 @@ const ActionsRow: React.FunctionComponent = () => {
           text="Rediger"
           onClick={() => setEditShippingDialogOpen(true)}
         />
-      </div>
+      </>
     );
   }
   return null;

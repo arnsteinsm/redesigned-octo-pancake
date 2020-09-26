@@ -5,16 +5,16 @@ import { FraktAppContext } from '../context/FraktAppProvider';
 
 const ResetOrderButtonRow: React.FunctionComponent = () => {
   const { state } = useContext(FraktAppContext);
-  const resetOrdre = useResetOrdre(state.orderInfo?.id);
+  const resetOrder = useResetOrdre(state.orderInfo?.id);
 
-  if (!resetOrdre) return null;
+  if (!resetOrder) return null;
 
   return (
     <>
       <BlockButtonRow
         variant="warning"
         text="Tilbakestill ordre"
-        onClick={resetOrdre}
+        onClick={resetOrder}
       />
     </>
   );

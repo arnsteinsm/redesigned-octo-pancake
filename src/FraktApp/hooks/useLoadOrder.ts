@@ -4,12 +4,12 @@ import { getPdfFromNote, getOtherOrderStatusPayload } from '../utils';
 import useAppActions from './useAppActions';
 
 const useLoadOrder = () => {
-  const { fetchOrdre, fetchOrdreNotes } = useFetchers();
+  const { fetchOrder, fetchOrdreNotes } = useFetchers();
   const {
-    setOtherOrderStatus,
+    showOtherOrderStatus,
     resetApp,
-    showAppAsLoading,
-    setOrderLoaded,
+    showAppLoading,
+    showOrderLoaded,
   } = useAppActions();
 
   const handleExistingOrder = (order: OrderInfo) => {
@@ -18,7 +18,7 @@ const useLoadOrder = () => {
       if (notes) {
         getPdfFromNote(notes);
       }
-      setOtherOrderStatus(
+      showOtherOrderStatus(
         getOtherOrderStatusPayload(
           order.status,
           orderId,
@@ -29,19 +29,21 @@ const useLoadOrder = () => {
     });
   };
 
-  return async (orderID: string) => {
+  return async (orderID?: string) => {
     resetApp();
-    showAppAsLoading();
-    const orderInfo = await fetchOrdre(orderID);
-    if (orderInfo && !Array.isArray(orderInfo)) {
-      if (orderInfo.status === 'klar-for-pakking') {
-        setOrderLoaded(orderInfo);
+    showAppLoading();
+    if (orderID) {
+      const orderInfo = await fetchOrder(orderID);
+      if (orderInfo && !Array.isArray(orderInfo)) {
+        if (orderInfo.status === 'klar-for-pakking') {
+          showOrderLoaded(orderInfo);
+        } else {
+          handleExistingOrder(orderInfo);
+        }
       } else {
-        handleExistingOrder(orderInfo);
+        alert('Ordrenr finnes ikke! Meldingskode:1');
+        resetApp();
       }
-    } else {
-      alert('Ordrenr finnes ikke! Meldingskode:1');
-      resetApp();
     }
   };
 };

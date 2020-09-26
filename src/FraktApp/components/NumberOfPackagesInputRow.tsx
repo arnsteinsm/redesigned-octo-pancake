@@ -7,24 +7,38 @@ import useAppActions from '../hooks/useAppActions';
 import { FraktAppContext } from '../context/FraktAppProvider';
 
 const NumberOfPackagesInputRow = () => {
-  const { selectNumberOfPackages, setNumberOfPackages } = useAppActions();
+  const {
+    showFinalActions,
+    setNumberOfPackages,
+    showOrderLoaded,
+  } = useAppActions();
   const { state } = useContext(FraktAppContext);
+
+  const updateNumberOfPackages = (numberOfPackages: number) => {
+    if (state.orderInfo) {
+      showOrderLoaded(state.orderInfo);
+      setNumberOfPackages(numberOfPackages);
+    }
+  };
+
   return (
     <Row className="mr-1 ml-1" id="row5">
       <InputGroup className="mb-3">
         <FormControl
-          type="text"
+          type="number"
           id="antallPak"
           placeholder="Antall kolli"
-          value={state.inputState.numberOfPackages}
-          onChange={(event) => setNumberOfPackages(event.currentTarget.value)}
+          value={state?.inputState?.numberOfPackages}
+          onChange={(event) =>
+            updateNumberOfPackages(parseInt(event.currentTarget.value))
+          }
         />
         <InputGroup.Append>
           <Button
             variant="outline-success"
             id="submitNumButton"
-            onClick={selectNumberOfPackages}
-            disabled={!state.inputState.numberOfPackages.length}
+            onClick={showFinalActions}
+            disabled={!state?.inputState?.numberOfPackages}
           >
             Bekreft
           </Button>
