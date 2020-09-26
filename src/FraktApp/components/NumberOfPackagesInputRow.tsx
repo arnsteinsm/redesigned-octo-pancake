@@ -24,6 +24,7 @@ const NumberOfPackagesInputRow = () => {
             variant="outline-success"
             id="submitNumButton"
             onClick={selectNumberOfPackages}
+            disabled={!state.inputState.numberOfPackages.length}
           >
             Bekreft
           </Button>

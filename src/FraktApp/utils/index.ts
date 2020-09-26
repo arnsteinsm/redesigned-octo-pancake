@@ -43,7 +43,6 @@ export const getOtherOrderStatusPayload = (
     return {
       text: getOrderInfoText('Denne ordren er allerede pakket. Meldingskode:6'),
       showResetOrderButtonRow: true,
-      orderID,
     };
   } else if (status === 'processing') {
     return {

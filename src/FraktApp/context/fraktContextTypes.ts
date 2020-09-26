@@ -8,12 +8,12 @@ interface VisibleComponents {
   showNumberOfPackagesInputRow: boolean;
   showActionsRow: boolean;
   showResetOrderButtonRow: boolean;
+  showResetAppRow: boolean;
 }
 
 export interface OtherOrderStatusPayload {
   text: string;
   showResetOrderButtonRow?: Boolean;
-  orderID?: string;
 }
 
 interface InputState {
@@ -26,7 +26,6 @@ export interface FraktAppState {
   orderInfo?: OrderInfo;
   inputState: InputState;
   actionDescription?: string;
-  possibleResetOrderId?: string;
 }
 
 interface SET_ORDER_LOADING_ACTION {

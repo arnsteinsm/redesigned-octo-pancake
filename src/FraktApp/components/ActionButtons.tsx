@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import BlockButtonRow from './BlockButtonRow';
-import useAppActions from '../hooks/useAppActions';
 import useGenerateShippingLabel from '../hooks/useGenerateShippingLabel';
 import { FraktAppContext } from '../context/FraktAppProvider';
 import EditShippingDialog from './EditShippingDialog';
@@ -8,7 +7,6 @@ import EditShippingDialog from './EditShippingDialog';
 //import { newPdfBrowser } from '../utils/pdfWindow';
 
 const ActionsRow: React.FunctionComponent = () => {
-  const { resetApp } = useAppActions();
   const { state } = useContext(FraktAppContext);
   const generateShippingLabel = useGenerateShippingLabel();
   const { orderInfo } = state;
@@ -31,13 +29,6 @@ const ActionsRow: React.FunctionComponent = () => {
           variant="success"
           text="Generer pakkelapp"
           onClick={() => generateShippingLabel(orderInfo, numberOfPackages)}
-        />
-        <BlockButtonRow
-          rowId="row7"
-          buttonId="cancelButton"
-          variant="danger"
-          text="Avbryt"
-          onClick={resetApp}
         />
         <BlockButtonRow
           rowId="row8"

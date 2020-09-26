@@ -5,7 +5,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const initialState = {
+const initialState: FraktAppState = {
   visibleComponents: {
     showSpinnerRow: false,
     showOrderNumberInputRow: true,
@@ -14,6 +14,7 @@ const initialState = {
     showNumberOfPackagesInputRow: false,
     showActionsRow: false,
     showResetOrderButtonRow: false,
+    showResetAppRow: false,
   },
   inputState: {
     orderID: '',
@@ -49,6 +50,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
           showActionDescriptionRow: true,
           showNumberOfPackagesInputRow: true,
           showResetOrderButtonRow: false,
+          showResetAppRow: true,
         },
         orderInfo: action.payload,
         actionDescription: 'Legg inn antall kolli:',
@@ -91,9 +93,9 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
           showOrderNumberInputRow: true,
           showSpinnerRow: false,
           showResetOrderButtonRow: true,
+          showResetAppRow: true,
         },
         actionDescription: action.payload?.text,
-        possibleResetOrderId: action.payload?.orderID,
       };
 
     case 'SET_ORDER_ID_INPUT':

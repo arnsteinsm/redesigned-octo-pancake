@@ -5,16 +5,9 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import AuthProvider from './Context/AuthProvider';
 import ApiCredentialsProvider from './Context/ApiCredentialsProvider';
-import * as Sentry from '@sentry/react';
+import LogRocket from 'logrocket';
 
-import { Integrations } from '@sentry/tracing';
-
-Sentry.init({
-  dsn:
-    'https://0bc9a2e54f3c4443bd1a88fbe540ffa0@o434225.ingest.sentry.io/5439060',
-  integrations: [new Integrations.BrowserTracing()],
-  tracesSampleRate: 1.0,
-});
+LogRocket.init('7cayg5/hervik-dash');
 
 ReactDOM.render(
   <BrowserRouter>

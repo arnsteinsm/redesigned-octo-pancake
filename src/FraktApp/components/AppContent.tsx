@@ -11,6 +11,7 @@ import { useContext } from 'react';
 import { FraktAppContext } from '../context/FraktAppProvider';
 import ActionsRow from './ActionButtons';
 import ResetOrderButtonRow from './ResetOrderButtonRow';
+import ResetAppRow from './ResetAppRow';
 
 const AppContent = () => {
   const { state } = useContext(FraktAppContext);
@@ -23,6 +24,7 @@ const AppContent = () => {
     showSpinnerRow,
     showOrderNumberInputRow,
     showResetOrderButtonRow,
+    showResetAppRow,
   } = state.visibleComponents;
 
   return (
@@ -34,6 +36,7 @@ const AppContent = () => {
       {showResetOrderButtonRow && <ResetOrderButtonRow />}
       {showNumberOfPackagesInputRow && <NumberOfPackagesInputRow />}
       {showActionsRow && <ActionsRow />}
+      {showResetAppRow && <ResetAppRow />}
     </>
   );
 };

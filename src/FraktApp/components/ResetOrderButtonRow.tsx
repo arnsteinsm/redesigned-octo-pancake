@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 import BlockButtonRow from './BlockButtonRow';
 import useResetOrdre from '../hooks/useResetOrdre';
 import { FraktAppContext } from '../context/FraktAppProvider';
-import useAppActions from '../hooks/useAppActions';
 
 const ResetOrderButtonRow: React.FunctionComponent = () => {
   const { state } = useContext(FraktAppContext);
-  const resetOrdre = useResetOrdre(state.possibleResetOrderId);
-  const { resetApp } = useAppActions();
+  const resetOrdre = useResetOrdre(state.orderInfo?.id);
+
   if (!resetOrdre) return null;
 
   return (
@@ -16,11 +15,6 @@ const ResetOrderButtonRow: React.FunctionComponent = () => {
         variant="warning"
         text="Tilbakestill ordre"
         onClick={resetOrdre}
-      />
-      <BlockButtonRow
-        variant="success"
-        text="Det stemmer, tilbakestill app"
-        onClick={resetApp}
       />
     </>
   );
