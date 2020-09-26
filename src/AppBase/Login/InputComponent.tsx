@@ -1,12 +1,12 @@
-import React, { useRef, useEffect } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import React, { useRef, useEffect } from "react";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
-import loginStyles from './Login.module.css';
+import loginStyles from "./Login.module.css";
 
 interface Props {
   label: string;
@@ -40,8 +40,8 @@ const InputComponent: React.FunctionComponent<Props> = ({
 
   return (
     <span className={loginStyles.loginInputWrapper}>
-      <FormControl variant='outlined' className={loginStyles.loginInput}>
-        <InputLabel htmlFor='outlined-adornment-password'>{label}</InputLabel>
+      <FormControl variant="outlined" className={loginStyles.loginInput}>
+        <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
         <OutlinedInput
           id={inputId}
           inputRef={currentInput}
@@ -56,11 +56,11 @@ const InputComponent: React.FunctionComponent<Props> = ({
           }}
           endAdornment={
             !disabled && (
-              <InputAdornment position='end'>
+              <InputAdornment position="end">
                 <IconButton
                   disabled={disabled}
-                  aria-label='toggle password visibility'
-                  edge='end'
+                  aria-label="toggle password visibility"
+                  edge="end"
                   onClick={onClick}
                 >
                   {icon}

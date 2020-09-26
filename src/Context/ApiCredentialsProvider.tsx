@@ -1,7 +1,7 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { AuthContext } from './AuthProvider';
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { AuthContext } from "./AuthProvider";
 
-import firebase from '../firebase';
+import firebase from "../firebase";
 
 interface ApiCredentialsContextType {
   apiCredentials?: Record<string, string>;
@@ -19,10 +19,10 @@ const ApiCredentialsProvider: React.FunctionComponent = ({ children }) => {
   >();
 
   useEffect(() => {
-    if (loginStatus === 'LOGGED_IN' && !apiCredentials) {
+    if (loginStatus === "LOGGED_IN" && !apiCredentials) {
       let credentialsRef = firebase.database().ref(`credentials`);
 
-      credentialsRef.once('value').then((snapshot) => {
+      credentialsRef.once("value").then((snapshot) => {
         const credentials = snapshot.val();
         setApiCredentials(credentials);
       });

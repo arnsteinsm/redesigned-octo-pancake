@@ -1,72 +1,50 @@
-import { useContext } from 'react';
-import { FraktAppContext } from '../context/FraktAppProvider';
-import { getPdfFromNote, getOtherOrderStatusPayload } from '../utils';
-import { OrderInfo } from '../../Types/order';
-import useFetchers from '../../hooks/useFetchers';
+import { useContext } from "react";
+import { FraktAppContext } from "../context/FraktAppProvider";
+import { OrderInfo } from "../../Types/order";
+import { OtherOrderStatusPayload } from "../context/fraktContextTypes";
 
 const useAppActions = () => {
   const { dispatch } = useContext(FraktAppContext);
 
-  const { fetchOrdre, fetchOrdreNotes } = useFetchers();
+  //Simple actions
+  const resetApp = () => dispatch({ type: "RESET_APP" });
 
-  const resetApp = () => dispatch({ type: 'RESET_APP' });
+  const setOrderLoaded = (payload: OrderInfo) =>
+    dispatch({ type: "SET_ORDER_LOADED", payload });
 
-  const handleExistingOrder = (order: OrderInfo) => {
-    const orderId = String(order.id);
-    fetchOrdreNotes(orderId).then((notes) => {
-      if (notes) {
-        getPdfFromNote(notes);
-      }
-      dispatch({
-        type: 'SET_OTHER_ORDER_STATUS_ACTION',
-        payload: getOtherOrderStatusPayload(
-          order.status,
-          orderId,
-          order.shipping.first_name,
-          order.shipping.last_name
-        ),
-      });
-    });
-  };
+  const showAppAsLoading = () => dispatch({ type: "SET_APP_LOADING" });
 
-  const loadOrder = async (orderID: string) => {
-    resetApp();
-    dispatch({ type: 'SET_APP_LOADING' });
-    const orderInfo = await fetchOrdre(orderID);
-    if (orderInfo && !Array.isArray(orderInfo)) {
-      if (orderInfo.status === 'klar-for-pakking') {
-        dispatch({ type: 'SET_ORDER_LOADED', payload: orderInfo });
-      } else {
-        handleExistingOrder(orderInfo);
-      }
-    } else {
-      alert('Ordrenr finnes ikke! Meldingskode:1');
-      resetApp();
-    }
-  };
+  const setOrderID = (payload: string) =>
+    dispatch({ type: "SET_ORDER_ID_INPUT", payload });
+
+  const setNumberOfPackages = (payload: string) =>
+    dispatch({ type: "SET_NUMBER_OF_PACKAGES_ID_INPUT", payload });
 
   const selectNumberOfPackages = () =>
-    dispatch({ type: 'NUMBER_OF_PACKAGE_SELECTED' });
+    dispatch({ type: "NUMBER_OF_PACKAGE_SELECTED" });
 
-  const editShippingInfo = () => alert('Rediger');
+  const setOtherOrderStatus = (payload: OtherOrderStatusPayload) =>
+    dispatch({
+      type: "SET_OTHER_ORDER_STATUS_ACTION",
+      payload,
+    });
 
-  const setOrderID = (orderID: string) =>
-    dispatch({ type: 'SET_ORDER_ID_INPUT', payload: orderID });
+  const editOrderPostcode = (payload: string) =>
+    dispatch({ type: "EDIT_ORDER_POSTCODE", payload });
 
-  const setNumberOfPackages = (quantity: string) =>
-    dispatch({ type: 'SET_NUMBER_OF_PACKAGES_ID_INPUT', payload: quantity });
-
-  const showAppAsLoading = () => dispatch({ type: 'SET_APP_LOADING' });
+  const editOrderName = (payload: string) =>
+    dispatch({ type: "EDIT_ORDER_NAME", payload });
 
   return {
-    loadOrder,
     selectNumberOfPackages,
-
     resetApp,
-    editShippingInfo,
     setOrderID,
     setNumberOfPackages,
     showAppAsLoading,
+    setOtherOrderStatus,
+    setOrderLoaded,
+    editOrderPostcode,
+    editOrderName,
   };
 };
 

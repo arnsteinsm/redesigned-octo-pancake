@@ -1,5 +1,5 @@
-import React, { useReducer, createContext } from 'react';
-import { FraktAppState, Action, ContextProps } from './fraktContextTypes';
+import React, { useReducer, createContext } from "react";
+import { FraktAppState, Action, ContextProps } from "./fraktContextTypes";
 
 interface Props {
   children: React.ReactNode;
@@ -16,8 +16,8 @@ const initialState = {
     showResetOrderButtonRow: false,
   },
   inputState: {
-    orderID: '',
-    numberOfPackages: '',
+    orderID: "",
+    numberOfPackages: "",
   },
 };
 
@@ -25,7 +25,7 @@ export const FraktAppContext = createContext({} as ContextProps);
 
 const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
   switch (action.type) {
-    case 'SET_APP_LOADING':
+    case "SET_APP_LOADING":
       return {
         ...state,
         visibleComponents: {
@@ -39,7 +39,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         },
       };
 
-    case 'SET_ORDER_LOADED':
+    case "SET_ORDER_LOADED":
       return {
         ...state,
         visibleComponents: {
@@ -51,10 +51,10 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
           showResetOrderButtonRow: false,
         },
         orderInfo: action.payload,
-        actionDescription: 'Legg inn antall kolli:',
+        actionDescription: "Legg inn antall kolli:",
       };
 
-    case 'NUMBER_OF_PACKAGE_SELECTED':
+    case "NUMBER_OF_PACKAGE_SELECTED":
       return {
         ...state,
         visibleComponents: {
@@ -64,10 +64,10 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
           showNumberOfPackagesInputRow: false,
           showActionsRow: true,
         },
-        actionDescription: '',
+        actionDescription: "",
       };
 
-    case 'CREATE_SHIPPING_LABEL':
+    case "CREATE_SHIPPING_LABEL":
       return {
         ...state,
         visibleComponents: {
@@ -80,7 +80,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         },
       };
 
-    case 'SET_OTHER_ORDER_STATUS_ACTION':
+    case "SET_OTHER_ORDER_STATUS_ACTION":
       return {
         ...state,
         visibleComponents: {
@@ -96,7 +96,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         possibleResetOrderId: action.payload?.orderID,
       };
 
-    case 'SET_ORDER_ID_INPUT':
+    case "SET_ORDER_ID_INPUT":
       return {
         ...state,
         inputState: {
@@ -105,7 +105,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         },
       };
 
-    case 'SET_NUMBER_OF_PACKAGES_ID_INPUT':
+    case "SET_NUMBER_OF_PACKAGES_ID_INPUT":
       return {
         ...state,
         inputState: {
@@ -114,7 +114,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         },
       };
 
-    case 'EDIT_ORDER_POSTCODE':
+    case "EDIT_ORDER_POSTCODE":
       return state.orderInfo?.shipping
         ? {
             ...state,
@@ -128,8 +128,8 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
           }
         : state;
 
-    case 'EDIT_ORDER_NAME':
-      const r = action.payload.split(' ');
+    case "EDIT_ORDER_NAME":
+      const r = action.payload.split(" ");
       const first_name = r.shift();
       const last_name = r.join();
       return state.orderInfo?.shipping
@@ -146,7 +146,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
           }
         : state;
 
-    case 'RESET_APP':
+    case "RESET_APP":
       return initialState;
 
     default:

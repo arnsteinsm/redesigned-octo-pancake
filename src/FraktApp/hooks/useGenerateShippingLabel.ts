@@ -1,7 +1,7 @@
-import useAppActions from './useAppActions';
-import { getBringBookingConfig } from '../utils/shipping';
-import { OrderInfo } from '../../Types/order';
-import useFetchers from '../../hooks/useFetchers';
+import useAppActions from "./useAppActions";
+import { getBringBookingConfig } from "../utils/shipping";
+import { OrderInfo } from "../../Types/order";
+import useFetchers from "../../hooks/useFetchers";
 
 const useGenerateShippingLabel = () => {
   const { showAppAsLoading, resetApp } = useAppActions();
@@ -20,24 +20,24 @@ const useGenerateShippingLabel = () => {
   ) => {
     const metaData = [
       {
-        key: 'tracking_url',
+        key: "tracking_url",
         value: bringResponse.consignments[0].confirmation.links.tracking,
       },
       {
-        key: 'tracking_number',
+        key: "tracking_number",
         value: bringResponse.consignments[0].confirmation.consignmentNumber,
       },
       {
-        key: 'sending_label',
+        key: "sending_label",
         value: bringResponse.consignments[0].confirmation.links.labels,
       },
     ];
 
-    updateOrder(orderID, 'pakket', metaData).then((res) => {
+    updateOrder(orderID, "pakket", metaData).then((res) => {
       if (res) {
         afterLabel(orderID, bringResponse);
       } else {
-        alert('Det skjedde en feil, Prøv igjen Meldingskode:2');
+        alert("Det skjedde en feil, Prøv igjen Meldingskode:2");
         resetApp();
       }
     });
@@ -71,17 +71,17 @@ const useGenerateShippingLabel = () => {
       ),
       makeOrderNote(
         orderID,
-        'Sendingsnr: ' +
+        "Sendingsnr: " +
           bringResponse.consignments[0].confirmation.consignmentNumber
       ),
     ])
       .then(() => {
-        alert('Ordre oppdatert');
+        alert("Ordre oppdatert");
         resetApp();
       })
       .catch((err) => {
         window.alert(
-          'Noe gikk galt under opplasting av pakkelapper til nettbutikken. Dette er ikke kritisk. Meldingskode:3'
+          "Noe gikk galt under opplasting av pakkelapper til nettbutikken. Dette er ikke kritisk. Meldingskode:3"
         );
       });
   };
@@ -94,7 +94,7 @@ const useGenerateShippingLabel = () => {
         if (data) {
           moveToFullfort(String(orderJson.id), data);
         } else {
-          alert('Generering av pakkelapp feilet Meldingskode:4');
+          alert("Generering av pakkelapp feilet Meldingskode:4");
         }
       }
     );

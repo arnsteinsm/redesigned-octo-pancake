@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import { useHistory } from 'react-router-dom';
-import appWrapperStyles from './appWrapper.module.css';
-import IconButton from '@material-ui/core/IconButton';
-import { AuthContext } from '../../Context/AuthProvider';
+import { useHistory } from "react-router-dom";
+import appWrapperStyles from "./appWrapper.module.css";
+import IconButton from "@material-ui/core/IconButton";
+import { AuthContext } from "../../Context/AuthProvider";
 
 interface Props {
   route: string;
@@ -19,9 +19,9 @@ const MenubarButton: React.FunctionComponent<Props> = ({
   const { logOut } = useContext(AuthContext);
   return (
     <IconButton
-      component='span'
-      size='small'
-      color='secondary'
+      component="span"
+      size="small"
+      color="secondary"
       onClick={() => {
         if (shouldLogOut) {
           logOut();

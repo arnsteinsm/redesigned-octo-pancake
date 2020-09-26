@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import hervikHjerteIcon from '../../Media/AppIcons/hervik-hjerte.png';
+import hervikHjerteIcon from "../../Media/AppIcons/hervik-hjerte.png";
 
-import appWrapperStyles from './appWrapper.module.css';
+import appWrapperStyles from "./appWrapper.module.css";
 
-import Power from '@material-ui/icons/PowerSettingsNew';
-import MenubarButton from './MenubarButton';
-import { useRouteMatch } from 'react-router-dom';
+import Power from "@material-ui/icons/PowerSettingsNew";
+import MenubarButton from "./MenubarButton";
+import { useRouteMatch } from "react-router-dom";
 
 const Menubar = () => {
   const match = useRouteMatch();
@@ -19,16 +19,16 @@ const Menubar = () => {
 
   return (
     <div className={appWrapperStyles.menuBar}>
-      <div id='menuLeft'>
-        <MenubarButton route={isSubPage ? '/authed' : '/'}>
-          <img src={hervikHjerteIcon} height='36px' alt='logo' />
+      <div id="menuLeft">
+        <MenubarButton route={isSubPage ? "/authed" : "/"}>
+          <img src={hervikHjerteIcon} height="36px" alt="logo" />
         </MenubarButton>
       </div>
       {isSubPage && (
-        <div id='menuRight'>
-          <MenubarButton shouldLogOut={true} route={'/'}>
+        <div id="menuRight">
+          <MenubarButton shouldLogOut={true} route={"/"}>
             <Power
-              htmlColor='white'
+              htmlColor="white"
               className={appWrapperStyles.iconButtonIcon}
             />
           </MenubarButton>

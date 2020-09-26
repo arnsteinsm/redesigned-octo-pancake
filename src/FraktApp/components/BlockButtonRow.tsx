@@ -1,11 +1,11 @@
-import React from 'react';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
+import React from "react";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
 
 interface Props {
   rowId?: string;
   buttonId?: string;
-  variant: 'success' | 'danger' | 'warning';
+  variant: "success" | "danger" | "warning";
   text: string;
   onClick: () => void;
 }
@@ -17,7 +17,7 @@ const BlockButtonRow: React.FunctionComponent<Props> = ({
   text,
   onClick,
 }) => (
-  <Row className='mr-1 ml-1 mt-2' id={rowId}>
+  <Row className="mr-1 ml-1 mt-2" id={rowId}>
     <Button id={buttonId} variant={variant} onClick={onClick} block>
       {text}
     </Button>

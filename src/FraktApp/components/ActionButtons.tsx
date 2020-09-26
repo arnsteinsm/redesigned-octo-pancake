@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
-import BlockButtonRow from './BlockButtonRow';
-import useAppActions from '../hooks/useAppActions';
-import useGenerateShippingLabel from '../hooks/useGenerateShippingLabel';
-import { FraktAppContext } from '../context/FraktAppProvider';
-import EditShippingDialog from './EditShippingDialog';
+import React, { useContext, useState } from "react";
+import BlockButtonRow from "./BlockButtonRow";
+import useAppActions from "../hooks/useAppActions";
+import useGenerateShippingLabel from "../hooks/useGenerateShippingLabel";
+import { FraktAppContext } from "../context/FraktAppProvider";
+import EditShippingDialog from "./EditShippingDialog";
 
 //import { newPdfBrowser } from '../utils/pdfWindow';
 
@@ -20,30 +20,30 @@ const ActionsRow: React.FunctionComponent = () => {
 
   if (orderInfo && !isNaN(numberOfPackages)) {
     return (
-      <div style={{ marginTop: '70px' }}>
+      <div style={{ marginTop: "70px" }}>
         <EditShippingDialog
           open={editShippingDialogOpen}
           handleClose={handleEditShippingDialogClose}
         />
         <BlockButtonRow
-          rowId='row6'
-          buttonId='makeLappButton'
-          variant='success'
-          text='Generer pakkelapp'
+          rowId="row6"
+          buttonId="makeLappButton"
+          variant="success"
+          text="Generer pakkelapp"
           onClick={() => generateShippingLabel(orderInfo, numberOfPackages)}
         />
         <BlockButtonRow
-          rowId='row7'
-          buttonId='cancelButton'
-          variant='danger'
-          text='Avbryt'
+          rowId="row7"
+          buttonId="cancelButton"
+          variant="danger"
+          text="Avbryt"
           onClick={resetApp}
         />
         <BlockButtonRow
-          rowId='row8'
-          buttonId='editInfoButton'
-          variant='warning'
-          text='Rediger'
+          rowId="row8"
+          buttonId="editInfoButton"
+          variant="warning"
+          text="Rediger"
           onClick={() => setEditShippingDialogOpen(true)}
         />
       </div>

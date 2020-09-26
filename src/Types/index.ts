@@ -1,7 +1,7 @@
 export enum APP_IDS {
-  POSTEN = 'posten',
-  KLARNA = 'klarna',
-  VISMA = 'visma',
+  POSTEN = "posten",
+  KLARNA = "klarna",
+  VISMA = "visma",
 }
 
 export interface UserData {
