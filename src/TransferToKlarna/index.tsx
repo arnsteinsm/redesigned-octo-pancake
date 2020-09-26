@@ -4,19 +4,19 @@ import React, {
   useCallback,
   useState,
   useRef,
-} from "react";
-import { ApiCredentialsContext } from "../Context/ApiCredentialsProvider";
-import { makeQuery } from "../commonUtils";
-import { OrderInfo } from "../Types/order";
-import Button from "@material-ui/core/Button";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import { useHistory } from "react-router-dom";
-import DialogActions from "@material-ui/core/DialogActions";
-import useFetchers from "../hooks/useFetchers";
-import { logError } from "../winston";
-import axios from "axios";
+} from 'react';
+import { ApiCredentialsContext } from '../Context/ApiCredentialsProvider';
+import { makeQuery } from '../commonUtils';
+import { OrderInfo } from '../Types/order';
+import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { useHistory } from 'react-router-dom';
+import DialogActions from '@material-ui/core/DialogActions';
+import useFetchers from '../hooks/useFetchers';
+import { logError } from '../winston';
+import axios from 'axios';
 
-const nettButikkBaseURL = "https://nettbutikk.hervik.com/wp-json/wc/v3";
+const nettButikkBaseURL = 'https://nettbutikk.hervik.com/wp-json/wc/v3';
 
 const TransferToKlarna: React.FunctionComponent = () => {
   const { apiCredentials } = useContext(ApiCredentialsContext);
@@ -32,10 +32,10 @@ const TransferToKlarna: React.FunctionComponent = () => {
 
   const fetchPackedOrders = useCallback(async () => {
     const wordpressProcessingQuery = makeQuery({
-      consumer_key: String(apiCredentials?.["wp_consumer_key"]),
-      consumer_secret: String(apiCredentials?.["wp_consumer_secret"]),
-      status: "pakket",
-      per_page: "100",
+      consumer_key: String(apiCredentials?.['wp_consumer_key']),
+      consumer_secret: String(apiCredentials?.['wp_consumer_secret']),
+      status: 'pakket',
+      per_page: '100',
     });
 
     const wordpressProcessingURL = `${nettButikkBaseURL}/orders${wordpressProcessingQuery}`;
@@ -43,7 +43,7 @@ const TransferToKlarna: React.FunctionComponent = () => {
       .get<OrderInfo[]>(wordpressProcessingURL)
       .then((res) => setPackedOrders(res.data))
       .catch((e) => {
-        logError("fetchPackedOrders", e);
+        logError('fetchPackedOrders', e);
       });
   }, [apiCredentials]);
 
@@ -55,7 +55,7 @@ const TransferToKlarna: React.FunctionComponent = () => {
 
   const closeAction = (
     <DialogActions>
-      <Button onClick={() => history.push("/authed")} color="primary">
+      <Button onClick={() => history.push('/authed')} color="primary">
         Lukk
       </Button>
     </DialogActions>
@@ -66,7 +66,7 @@ const TransferToKlarna: React.FunctionComponent = () => {
       ...(statusArray || []),
       <p key={key}>{status}</p>,
     ]);
-    const statusContainer = document.getElementById("statuses");
+    const statusContainer = document.getElementById('statuses');
     if (statusContainer) {
       statusContainer.scrollTo({ top: 100000 });
     }
@@ -84,32 +84,32 @@ const TransferToKlarna: React.FunctionComponent = () => {
           .get(
             `https://europe-west2-hervik-dash.cloudfunctions.net/getKlarnaOrder?klarnaId=${
               wooOrder.transaction_id
-            }&auth=${String(apiCredentials?.["klarnaAuth"])}`
+            }&auth=${String(apiCredentials?.['klarnaAuth'])}`
           )
           .then((res) => res.data)
           .catch((e) => {
             setOrderError((errors) => [...errors, wooOrder.id]);
-            logError("getKlarnaOrder", e);
+            logError('getKlarnaOrder', e);
           });
 
         addStatusMessage(
           `Hentet ordrenr ${wooOrder.id} fra klarna. Ordre ${orderCount} av ${totalOrderCount}`,
-          String("HOFK" + wooOrder.id)
+          String('HOFK' + wooOrder.id)
         );
 
         const wooShippingLine = wooOrder.shipping_lines.shift();
 
         const shipping_info = {
-          shipping_company: "Bring",
+          shipping_company: 'Bring',
           shipping_method:
-            wooShippingLine?.method_title === "Servicepakke"
-              ? "PickUpPoint"
-              : "Home",
+            wooShippingLine?.method_title === 'Servicepakke'
+              ? 'PickUpPoint'
+              : 'Home',
           tracking_number: wooOrder.meta_data.find(
-            (meta) => meta.key === "tracking_number"
+            (meta) => meta.key === 'tracking_number'
           )?.value,
           tracking_uri: wooOrder.meta_data.find(
-            (meta) => meta.key === "tracking_url"
+            (meta) => meta.key === 'tracking_url'
           )?.value,
         };
 
@@ -124,22 +124,22 @@ const TransferToKlarna: React.FunctionComponent = () => {
           .post(
             `https://europe-west2-hervik-dash.cloudfunctions.net/captureKlarnaOrder?klarnaId=${
               wooOrder.transaction_id
-            }&auth=${String(apiCredentials?.["klarnaAuth"])}`,
+            }&auth=${String(apiCredentials?.['klarnaAuth'])}`,
             orderInfo
           )
           .then(() => {
             addStatusMessage(
               `Ordrenr ${wooOrder.id} godkjent hos klarna. Ordre ${orderCount} av ${totalOrderCount}`,
-              "OGK" + wooOrder.id
+              'OGK' + wooOrder.id
             );
           })
-          .catch((e) => logError("TransferToKlarnaL137", e));
+          .catch((e) => logError('TransferToKlarnaL137', e));
 
-        await updateOrder(String(wooOrder.id), "completed").then((res) => {
+        await updateOrder(String(wooOrder.id), 'completed').then((res) => {
           if (res) {
             addStatusMessage(
               `Ordrenr ${wooOrder.id} flyttet til godkjent. Ordre ${orderCount} av ${totalOrderCount}`,
-              "OFG" + wooOrder.id
+              'OFG' + wooOrder.id
             );
           } else {
             setOrderError((cur) => [...cur, wooOrder.id]);
@@ -160,14 +160,14 @@ const TransferToKlarna: React.FunctionComponent = () => {
           <>
             {updatingOrdre && <LinearProgress />}
             <div
-              style={{ height: "200px", overflowX: "scroll" }}
+              style={{ height: '200px', overflowX: 'scroll' }}
               id="statuses"
               ref={statusContainer}
             >
               {statuses}
 
               {!!orderError.length &&
-                "Feil med ordre sjekk disse:" + orderError.join(", ")}
+                'Feil med ordre sjekk disse:' + orderError.join(', ')}
             </div>
           </>
         ) : (

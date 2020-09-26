@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import BlockButtonRow from "./BlockButtonRow";
-import useResetOrdre from "../hooks/useResetOrdre";
-import { FraktAppContext } from "../context/FraktAppProvider";
-import useAppActions from "../hooks/useAppActions";
+import React, { useContext } from 'react';
+import BlockButtonRow from './BlockButtonRow';
+import useResetOrdre from '../hooks/useResetOrdre';
+import { FraktAppContext } from '../context/FraktAppProvider';
+import useAppActions from '../hooks/useAppActions';
 
 const ResetOrderButtonRow: React.FunctionComponent = () => {
   const { state } = useContext(FraktAppContext);

@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import switcherStyles from "./switcher.module.css";
+import switcherStyles from './switcher.module.css';
 
-import hervikBjorn from "../../Media/hervik-bjørn.png";
-import AccountSettingsButton from "../AccountSettings/AccountSettingsButton";
+import hervikBjorn from '../../Media/hervik-bjørn.png';
+import AccountSettingsButton from '../AccountSettings/AccountSettingsButton';
 
 const UserInfoContainer = () => {
   return (

@@ -4,20 +4,20 @@ import React, {
   useCallback,
   useState,
   useRef,
-} from "react";
-import { ApiCredentialsContext } from "../Context/ApiCredentialsProvider";
-import { makeQuery } from "../commonUtils";
-import { OrderInfo } from "../Types/order";
-import { generateCsv, downloadCsv, getFileName } from "./utils";
-import Button from "@material-ui/core/Button";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import { useHistory } from "react-router-dom";
-import DialogActions from "@material-ui/core/DialogActions";
-import useFetchers from "../hooks/useFetchers";
-import { logError } from "../winston";
-import axios from "axios";
+} from 'react';
+import { ApiCredentialsContext } from '../Context/ApiCredentialsProvider';
+import { makeQuery } from '../commonUtils';
+import { OrderInfo } from '../Types/order';
+import { generateCsv, downloadCsv, getFileName } from './utils';
+import Button from '@material-ui/core/Button';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { useHistory } from 'react-router-dom';
+import DialogActions from '@material-ui/core/DialogActions';
+import useFetchers from '../hooks/useFetchers';
+import { logError } from '../winston';
+import axios from 'axios';
 
-const nettButikkBaseURL = "https://nettbutikk.hervik.com/wp-json/wc/v3";
+const nettButikkBaseURL = 'https://nettbutikk.hervik.com/wp-json/wc/v3';
 
 const OrderFileExport: React.FunctionComponent = () => {
   const { apiCredentials } = useContext(ApiCredentialsContext);
@@ -33,10 +33,10 @@ const OrderFileExport: React.FunctionComponent = () => {
 
   const fetchProcessingOrders = useCallback(() => {
     const wordpressProcessingQuery = makeQuery({
-      consumer_key: String(apiCredentials?.["wp_consumer_key"]),
-      consumer_secret: String(apiCredentials?.["wp_consumer_secret"]),
-      status: "processing",
-      per_page: "100",
+      consumer_key: String(apiCredentials?.['wp_consumer_key']),
+      consumer_secret: String(apiCredentials?.['wp_consumer_secret']),
+      status: 'processing',
+      per_page: '100',
     });
 
     const wordpressProcessingURL = `${nettButikkBaseURL}/orders${wordpressProcessingQuery}`;
@@ -44,7 +44,7 @@ const OrderFileExport: React.FunctionComponent = () => {
     axios
       .get<OrderInfo[]>(wordpressProcessingURL)
       .then((res) => setProcessingOrders(res.data))
-      .catch((e) => logError("fetchProcessingOrders", e));
+      .catch((e) => logError('fetchProcessingOrders', e));
   }, [apiCredentials]);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const OrderFileExport: React.FunctionComponent = () => {
       for (let index = 0; index < processingOrders.length; index++) {
         const response = await updateOrder(
           String(processingOrders[index].id),
-          "klar-for-pakking"
+          'klar-for-pakking'
         );
 
         if (!response) {
@@ -73,7 +73,7 @@ const OrderFileExport: React.FunctionComponent = () => {
 
   const closeAction = (
     <DialogActions>
-      <Button onClick={() => history.push("/authed")} color="primary">
+      <Button onClick={() => history.push('/authed')} color="primary">
         Lukk
       </Button>
     </DialogActions>

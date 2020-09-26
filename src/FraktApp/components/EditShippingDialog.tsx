@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
+import React, { useState, useEffect, useContext } from 'react';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
 
-import { FraktAppContext } from "../context/FraktAppProvider";
-import useAppActions from "../hooks/useAppActions";
+import { FraktAppContext } from '../context/FraktAppProvider';
+import useAppActions from '../hooks/useAppActions';
 
 interface Props {
   open: boolean;
@@ -18,8 +18,8 @@ const EditShippingDialog: React.FunctionComponent<Props> = ({
   handleClose,
 }) => {
   enum EditOptions {
-    POSTNUMMER = "Postnummer",
-    NAVN = "Navn",
+    POSTNUMMER = 'Postnummer',
+    NAVN = 'Navn',
   }
 
   const { state } = useContext(FraktAppContext);
@@ -38,7 +38,7 @@ const EditShippingDialog: React.FunctionComponent<Props> = ({
     } else if (selectedEditOption === EditOptions.NAVN) {
       setInputValue(
         state.orderInfo?.shipping.first_name +
-          " " +
+          ' ' +
           state.orderInfo?.shipping.last_name
       );
     }
@@ -68,11 +68,11 @@ const EditShippingDialog: React.FunctionComponent<Props> = ({
   return (
     <Dialog open={open} onClose={beforeClose}>
       <DialogTitle>Rediger forsendelse</DialogTitle>
-      <DialogContent style={{ display: "flex", flexDirection: "column" }}>
+      <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>
         <label htmlFor="choices">Hva vil du endre?</label>
         <select
           id="choices"
-          style={{ width: "200px", marginBottom: "13px" }}
+          style={{ width: '200px', marginBottom: '13px' }}
           value={selectedEditOption}
           onChange={(event) => {
             setSelectedEditOption(event.currentTarget.value as EditOptions);

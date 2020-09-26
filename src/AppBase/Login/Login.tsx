@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from 'react';
 
-import { AuthContext } from "../../Context/AuthProvider";
-import RightArrow from "@material-ui/icons/KeyboardArrowRightRounded";
+import { AuthContext } from '../../Context/AuthProvider';
+import RightArrow from '@material-ui/icons/KeyboardArrowRightRounded';
 
-import loginStyles from "./Login.module.css";
-import InputComponent from "./InputComponent";
-import Button from "@material-ui/core/Button";
+import loginStyles from './Login.module.css';
+import InputComponent from './InputComponent';
+import Button from '@material-ui/core/Button';
 
 type InputOnchangeEvent = React.ChangeEvent<HTMLInputElement>;
 
@@ -19,15 +19,15 @@ const Login = () => {
     resetPassword,
   } = useContext(AuthContext);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [emailChanged, setEmailChanged] = useState(false);
 
   const inputSettings = {
     email: {
-      label: "E-post",
+      label: 'E-post',
       icon: <RightArrow />,
-      inputType: "email",
+      inputType: 'email',
       value: email,
       onClick: () => {
         loginEmail(email.trim());
@@ -39,9 +39,9 @@ const Login = () => {
       },
     },
     password: {
-      label: "Password",
+      label: 'Password',
       icon: <RightArrow />,
-      inputType: "password",
+      inputType: 'password',
       value: password,
       onClick: () => {
         login(email.trim(), password);
@@ -63,7 +63,7 @@ const Login = () => {
         inputType={inputSettings.email.inputType}
         value={inputSettings.email.value}
         errorText={
-          !(emailChecked && !emailChanged && emailUserExists) ? errorText : ""
+          !(emailChecked && !emailChanged && emailUserExists) ? errorText : ''
         }
         disabled={emailChecked && !emailChanged}
       />

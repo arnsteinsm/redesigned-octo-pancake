@@ -1,9 +1,9 @@
-import React, { createContext, useState, useEffect } from "react";
-import firebase from "../firebase";
-import { UserData } from "../Types";
-import { useHistory } from "react-router-dom";
+import React, { createContext, useState, useEffect } from 'react';
+import firebase from '../firebase';
+import { UserData } from '../Types';
+import { useHistory } from 'react-router-dom';
 
-type LoginStatuses = "LOGGED_IN" | "LOGGED_OUT";
+type LoginStatuses = 'LOGGED_IN' | 'LOGGED_OUT';
 
 interface AuthContextType {
   loginEmail: (email: string) => void;
@@ -30,7 +30,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
 
   const [emailChecked, setEmailChecked] = useState(false);
   const [emailUserExists, setEmailUserExists] = useState(false);
-  const [errorText, setErrorText] = useState("");
+  const [errorText, setErrorText] = useState('');
 
   const loginEmail = (email: string) => {
     if (email.length) {
@@ -39,7 +39,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         .fetchSignInMethodsForEmail(email)
         .then((methods) => {
           if (methods.length) {
-            setErrorText("");
+            setErrorText('');
             setEmailUserExists(true);
           }
         })
@@ -47,12 +47,12 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
           setEmailChecked(true);
         })
         .catch((e) => {
-          if (e.code === "auth/invalid-email") {
-            setErrorText("Ingen bruker for valgt e-post");
+          if (e.code === 'auth/invalid-email') {
+            setErrorText('Ingen bruker for valgt e-post');
           }
         });
     } else {
-      setErrorText("Legg inn e-post");
+      setErrorText('Legg inn e-post');
     }
   };
 
@@ -65,16 +65,16 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
           firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
         })
         .catch((e) => {
-          if (e.code === "auth/wrong-password") {
-            setErrorText("Feil passord");
-          } else if (e.code === "auth/too-many-requests") {
+          if (e.code === 'auth/wrong-password') {
+            setErrorText('Feil passord');
+          } else if (e.code === 'auth/too-many-requests') {
             setErrorText(
-              "Du har tastet feil passord for mange ganger, prøv igjen senere."
+              'Du har tastet feil passord for mange ganger, prøv igjen senere.'
             );
           }
         });
     } else {
-      window.alert("Legg inn brukernavn og passord");
+      window.alert('Legg inn brukernavn og passord');
     }
   };
 
@@ -82,8 +82,8 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
     firebase.auth().sendPasswordResetEmail(email);
 
   const logOut = () => {
-    window.location.pathname = "";
-    setLoginStatus("LOGGED_OUT");
+    window.location.pathname = '';
+    setLoginStatus('LOGGED_OUT');
     firebase.auth().signOut();
   };
 
@@ -96,16 +96,16 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
           let userData = firebase.database().ref(`users/${current.uid}`);
 
           userData
-            .once("value")
+            .once('value')
             .then((snapshot) => {
               //Håndterer brukere
               const data = snapshot.val() as UserData | undefined; // null
               setUserDataState(data || null);
             })
             .then(() => {
-              setLoginStatus("LOGGED_IN");
+              setLoginStatus('LOGGED_IN');
               if (window.location.pathname.length <= 1) {
-                history.push("/authed");
+                history.push('/authed');
               }
             })
             .catch((e) => {
@@ -114,7 +114,7 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
         }
       } else {
         setUserDataState(null);
-        history.push("/");
+        history.push('/');
       }
     });
   }, [history]);

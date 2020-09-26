@@ -1,7 +1,7 @@
-import useFetchers from "../../hooks/useFetchers";
-import { OrderInfo } from "../../Types/order";
-import { getPdfFromNote, getOtherOrderStatusPayload } from "../utils";
-import useAppActions from "./useAppActions";
+import useFetchers from '../../hooks/useFetchers';
+import { OrderInfo } from '../../Types/order';
+import { getPdfFromNote, getOtherOrderStatusPayload } from '../utils';
+import useAppActions from './useAppActions';
 
 const useLoadOrder = () => {
   const { fetchOrdre, fetchOrdreNotes } = useFetchers();
@@ -34,13 +34,13 @@ const useLoadOrder = () => {
     showAppAsLoading();
     const orderInfo = await fetchOrdre(orderID);
     if (orderInfo && !Array.isArray(orderInfo)) {
-      if (orderInfo.status === "klar-for-pakking") {
+      if (orderInfo.status === 'klar-for-pakking') {
         setOrderLoaded(orderInfo);
       } else {
         handleExistingOrder(orderInfo);
       }
     } else {
-      alert("Ordrenr finnes ikke! Meldingskode:1");
+      alert('Ordrenr finnes ikke! Meldingskode:1');
       resetApp();
     }
   };

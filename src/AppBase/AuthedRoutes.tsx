@@ -1,10 +1,10 @@
-import React, { Suspense } from "react";
+import React, { Suspense } from 'react';
 
-import { Switch, Route, useRouteMatch } from "react-router-dom";
-import Switcher from "./Switcher";
-import { APP_IDS } from "../Types";
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import Switcher from './Switcher';
+import { APP_IDS } from '../Types';
 
-const FraktApp = React.lazy(() => import("../FraktApp"));
+const FraktApp = React.lazy(() => import('../FraktApp'));
 
 const AuthedRoutes = () => {
   const match = useRouteMatch();

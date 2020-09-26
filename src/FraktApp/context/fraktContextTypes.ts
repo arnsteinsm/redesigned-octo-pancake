@@ -1,4 +1,4 @@
-import { OrderInfo } from "../../Types/order";
+import { OrderInfo } from '../../Types/order';
 
 interface VisibleComponents {
   showSpinnerRow: boolean;
@@ -30,47 +30,47 @@ export interface FraktAppState {
 }
 
 interface SET_ORDER_LOADING_ACTION {
-  type: "SET_APP_LOADING";
+  type: 'SET_APP_LOADING';
 }
 interface SET_ORDER_LOADED_ACTION {
-  type: "SET_ORDER_LOADED";
+  type: 'SET_ORDER_LOADED';
   payload: OrderInfo;
 }
 
 interface NUMBER_OF_PACKAGE_SELECTED_ACTION {
-  type: "NUMBER_OF_PACKAGE_SELECTED";
+  type: 'NUMBER_OF_PACKAGE_SELECTED';
 }
 
 interface CREATE_SHIPPING_LABEL_ACTION {
-  type: "CREATE_SHIPPING_LABEL";
+  type: 'CREATE_SHIPPING_LABEL';
 }
 
 interface RESET_APP_ACTION {
-  type: "RESET_APP";
+  type: 'RESET_APP';
 }
 
 interface SET_ORDER_ID_INPUT_ACTION {
-  type: "SET_ORDER_ID_INPUT";
+  type: 'SET_ORDER_ID_INPUT';
   payload: string;
 }
 
 interface SET_NUMBER_OF_PACKAGES_ID_INPUT_ACTION {
-  type: "SET_NUMBER_OF_PACKAGES_ID_INPUT";
+  type: 'SET_NUMBER_OF_PACKAGES_ID_INPUT';
   payload: string;
 }
 
 interface SET_OTHER_ORDER_STATUS_ACTION {
-  type: "SET_OTHER_ORDER_STATUS_ACTION";
+  type: 'SET_OTHER_ORDER_STATUS_ACTION';
   payload?: OtherOrderStatusPayload;
 }
 
 interface EDIT_ORDER_POSTCODE {
-  type: "EDIT_ORDER_POSTCODE";
+  type: 'EDIT_ORDER_POSTCODE';
   payload: string;
 }
 
 interface EDIT_ORDER_NAME {
-  type: "EDIT_ORDER_NAME";
+  type: 'EDIT_ORDER_NAME';
   payload: string;
 }
 

@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import Row from "react-bootstrap/Row";
-import Table from "react-bootstrap/Table";
-import { FraktAppContext } from "../context/FraktAppProvider";
+import React, { useContext } from 'react';
+import Row from 'react-bootstrap/Row';
+import Table from 'react-bootstrap/Table';
+import { FraktAppContext } from '../context/FraktAppProvider';
 
 const OrderInfoRow: React.FunctionComponent = () => {
   const { state } = useContext(FraktAppContext);
@@ -19,7 +19,7 @@ const OrderInfoRow: React.FunctionComponent = () => {
           <tr>
             <td id="ordreIn">{state.orderInfo.id}</td>
             <td id="navnIn">
-              {state.orderInfo.shipping.first_name}{" "}
+              {state.orderInfo.shipping.first_name}{' '}
               {state.orderInfo.shipping.last_name}
             </td>
           </tr>

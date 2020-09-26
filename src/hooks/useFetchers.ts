@@ -1,23 +1,23 @@
-import { useContext } from "react";
-import { ApiCredentialsContext } from "../Context/ApiCredentialsProvider";
+import { useContext } from 'react';
+import { ApiCredentialsContext } from '../Context/ApiCredentialsProvider';
 
-import { makeQuery } from "../commonUtils";
-import { OrderInfo, OrderNote } from "../Types/order";
-import { logError } from "../winston";
-import axios from "axios";
+import { makeQuery } from '../commonUtils';
+import { OrderInfo, OrderNote } from '../Types/order';
+import { logError } from '../winston';
+import axios from 'axios';
 
 const useFetchers = () => {
   const { apiCredentials } = useContext(ApiCredentialsContext);
 
   const wordpressQuery = makeQuery({
-    consumer_key: String(apiCredentials?.["wp_consumer_key"]),
-    consumer_secret: String(apiCredentials?.["wp_consumer_secret"]),
+    consumer_key: String(apiCredentials?.['wp_consumer_key']),
+    consumer_secret: String(apiCredentials?.['wp_consumer_secret']),
   });
 
-  const nettButikkBaseURL = "https://nettbutikk.hervik.com/wp-json/wc/v3";
+  const nettButikkBaseURL = 'https://nettbutikk.hervik.com/wp-json/wc/v3';
 
   const bringQuery = makeQuery({
-    key: String(apiCredentials?.["X-MyBring-API-Key"]),
+    key: String(apiCredentials?.['X-MyBring-API-Key']),
   });
 
   const fetchOrdre = async (orderID: string) => {
@@ -25,7 +25,7 @@ const useFetchers = () => {
       .get<OrderInfo>(`${nettButikkBaseURL}/orders/${orderID}${wordpressQuery}`)
       .then((res) => res.data)
       .catch((e) => {
-        logError("fetchOrdre", e);
+        logError('fetchOrdre', e);
       });
   };
 
@@ -36,7 +36,7 @@ const useFetchers = () => {
       )
       .then((res) => res.data)
       .catch((e) => {
-        logError("fetchOrdreNotes", e);
+        logError('fetchOrdreNotes', e);
       });
   };
 
@@ -48,7 +48,7 @@ const useFetchers = () => {
       })
       .then((res) => res.data)
       .catch((e) => {
-        logError("updateOrder", e);
+        logError('updateOrder', e);
       });
 
   const getBringBooking = (bringBooking: object) =>
@@ -59,7 +59,7 @@ const useFetchers = () => {
       )
       .then((res) => res.data)
       .catch((e) => {
-        logError("getBringBooking", e);
+        logError('getBringBooking', e);
       });
 
   const makeOrderNote = (orderID: string, note: string) =>
@@ -69,7 +69,7 @@ const useFetchers = () => {
       })
       .then((res) => res.data)
       .catch((e) => {
-        logError("makeOrderNote", e);
+        logError('makeOrderNote', e);
       });
 
   return {

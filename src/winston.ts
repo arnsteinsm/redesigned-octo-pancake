@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError } from 'axios';
 
 export const logError = async (message: string, extra: AxiosError) => {
   const body = {

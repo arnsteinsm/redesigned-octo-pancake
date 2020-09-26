@@ -1,4 +1,4 @@
-import { OrderInfo } from "../Types/order";
+import { OrderInfo } from '../Types/order';
 
 export const generateCsv = (processingOrders: OrderInfo[]) => {
   const newCsvTextField = (val: string) => `"${val}",`;
@@ -9,11 +9,11 @@ export const generateCsv = (processingOrders: OrderInfo[]) => {
     const day = dateCreated.getDate();
     const month = dateCreated.getMonth() + 1;
     const year = String(dateCreated.getFullYear()).substr(2, 4);
-    const orderHeader = newCsvTextField("OH");
+    const orderHeader = newCsvTextField('OH');
     const orderNummer = newCsvTextField(`9000${order.id}`);
     const vGlobalDate = newCsvValueField(`${day}${month}${year}`);
-    const varRef = newCsvTextField("Nettbutikk");
-    const kunde = newCsvValueField("214704");
+    const varRef = newCsvTextField('Nettbutikk');
+    const kunde = newCsvValueField('214704');
     const cusNam = newCsvTextField(
       `${order.billing.first_name} ${order.billing.last_name}`
     );
@@ -28,7 +28,7 @@ export const generateCsv = (processingOrders: OrderInfo[]) => {
       orderNummer +
       vGlobalDate +
       vGlobalDate +
-      "0," +
+      '0,' +
       varRef +
       kunde +
       cusNam +
@@ -37,18 +37,18 @@ export const generateCsv = (processingOrders: OrderInfo[]) => {
       '"",' +
       poCo +
       poCi +
-      "0,0,0,0,0,0,0,0" +
-      "\r\n";
+      '0,0,0,0,0,0,0,0' +
+      '\r\n';
 
     const orderLineFrakt =
       '"OL","999","Frakt",0,0,0,0,0,0,0,0,' +
       Number(order.shipping_total) +
-      ",0.00,0.00,0.00,1," +
+      ',0.00,0.00,0.00,1,' +
       proTi +
-      "\r\n";
+      '\r\n';
 
     const productLines = order.line_items.reduce((productCsv, product) => {
-      const productLineHeader = newCsvTextField("OL");
+      const productLineHeader = newCsvTextField('OL');
       const productNumber = newCsvTextField(product.sku);
       const productName = newCsvTextField(product.name);
       const productQuantity = product.quantity;
@@ -60,33 +60,33 @@ export const generateCsv = (processingOrders: OrderInfo[]) => {
         productLineHeader +
         productNumber +
         productName +
-        "0,0,0,0,0,0,0,0," +
+        '0,0,0,0,0,0,0,0,' +
         productPrice +
-        "0.00,0.00,0.00," +
+        '0.00,0.00,0.00,' +
         productQuantityLine +
         proTi +
-        "\r\n"
+        '\r\n'
       );
-    }, "");
+    }, '');
 
     return orderCsv + orderHeaderLine + orderLineFrakt + productLines;
-  }, "");
+  }, '');
 };
 
 export const getFileName = (date: Date) =>
-  "OrdreFil_" +
+  'OrdreFil_' +
   date.getDate() +
   (date.getMonth() + 1) +
   date.getFullYear() +
   date.getHours() +
   date.getMinutes() +
-  ".csv";
+  '.csv';
 
 export const downloadCsv = (csvString: string, filename: string) => {
-  var hiddenElement = document.createElement("a");
+  var hiddenElement = document.createElement('a');
   hiddenElement.href =
-    "data:text/csv;charset=utf-8," + encodeURI("\uFEFF" + csvString);
-  hiddenElement.target = "_blank";
+    'data:text/csv;charset=utf-8,' + encodeURI('\uFEFF' + csvString);
+  hiddenElement.target = '_blank';
   hiddenElement.download = filename;
   hiddenElement.click();
 };

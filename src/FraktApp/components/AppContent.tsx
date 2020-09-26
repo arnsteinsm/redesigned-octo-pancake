@@ -1,16 +1,16 @@
-import * as React from "react";
+import * as React from 'react';
 
-import SpinnerRow from "./SpinnerRow";
-import OrderNumberInputRow from "./OrderNumberInputRow";
-import OrderInfoRow from "./OrderInfoRow";
-import ActionDescriptionRow from "./ActionDescriptionRow";
-import NumberOfPackagesInputRow from "./NumberOfPackagesInputRow";
+import SpinnerRow from './SpinnerRow';
+import OrderNumberInputRow from './OrderNumberInputRow';
+import OrderInfoRow from './OrderInfoRow';
+import ActionDescriptionRow from './ActionDescriptionRow';
+import NumberOfPackagesInputRow from './NumberOfPackagesInputRow';
 
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import { FraktAppContext } from "../context/FraktAppProvider";
-import ActionsRow from "./ActionButtons";
-import ResetOrderButtonRow from "./ResetOrderButtonRow";
+import { FraktAppContext } from '../context/FraktAppProvider';
+import ActionsRow from './ActionButtons';
+import ResetOrderButtonRow from './ResetOrderButtonRow';
 
 const AppContent = () => {
   const { state } = useContext(FraktAppContext);

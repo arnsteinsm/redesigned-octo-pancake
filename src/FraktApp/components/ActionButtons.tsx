@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
-import BlockButtonRow from "./BlockButtonRow";
-import useAppActions from "../hooks/useAppActions";
-import useGenerateShippingLabel from "../hooks/useGenerateShippingLabel";
-import { FraktAppContext } from "../context/FraktAppProvider";
-import EditShippingDialog from "./EditShippingDialog";
+import React, { useContext, useState } from 'react';
+import BlockButtonRow from './BlockButtonRow';
+import useAppActions from '../hooks/useAppActions';
+import useGenerateShippingLabel from '../hooks/useGenerateShippingLabel';
+import { FraktAppContext } from '../context/FraktAppProvider';
+import EditShippingDialog from './EditShippingDialog';
 
 //import { newPdfBrowser } from '../utils/pdfWindow';
 
@@ -20,7 +20,7 @@ const ActionsRow: React.FunctionComponent = () => {
 
   if (orderInfo && !isNaN(numberOfPackages)) {
     return (
-      <div style={{ marginTop: "70px" }}>
+      <div style={{ marginTop: '70px' }}>
         <EditShippingDialog
           open={editShippingDialogOpen}
           handleClose={handleEditShippingDialogClose}

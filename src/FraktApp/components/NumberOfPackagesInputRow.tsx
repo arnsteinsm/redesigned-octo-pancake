@@ -1,10 +1,10 @@
-import Row from "react-bootstrap/Row";
-import React, { useContext } from "react";
-import FormControl from "react-bootstrap/FormControl";
-import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
-import useAppActions from "../hooks/useAppActions";
-import { FraktAppContext } from "../context/FraktAppProvider";
+import Row from 'react-bootstrap/Row';
+import React, { useContext } from 'react';
+import FormControl from 'react-bootstrap/FormControl';
+import Button from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
+import useAppActions from '../hooks/useAppActions';
+import { FraktAppContext } from '../context/FraktAppProvider';
 
 const NumberOfPackagesInputRow = () => {
   const { selectNumberOfPackages, setNumberOfPackages } = useAppActions();

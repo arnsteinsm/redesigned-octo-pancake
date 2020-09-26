@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import switcherStyles from "./switcher.module.css";
-import { AppButtonConfig, APP_IDS } from "../../Types";
+import React, { useContext } from 'react';
+import switcherStyles from './switcher.module.css';
+import { AppButtonConfig, APP_IDS } from '../../Types';
 
-import postenAppIcon from "../../Media/AppIcons/posten.png";
-import klarnaAppIcon from "../../Media/AppIcons/klarna.png";
-import vismaAppIcon from "../../Media/AppIcons/visma.png";
-import { useHistory, useRouteMatch } from "react-router-dom";
-import { AuthContext } from "../../Context/AuthProvider";
+import postenAppIcon from '../../Media/AppIcons/posten.png';
+import klarnaAppIcon from '../../Media/AppIcons/klarna.png';
+import vismaAppIcon from '../../Media/AppIcons/visma.png';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider';
 
 interface Props {
   appId: APP_IDS;
@@ -21,15 +21,15 @@ const AppButton: React.FunctionComponent<Props> = ({ appId }) => {
 
   const appButtonConfig: Record<APP_IDS, AppButtonConfig> = {
     posten: {
-      buttonText: "Fraktapp",
+      buttonText: 'Fraktapp',
       icon: postenAppIcon,
     },
     klarna: {
-      buttonText: "Godkjenn hos klarna",
+      buttonText: 'Godkjenn hos klarna',
       icon: klarnaAppIcon,
     },
     visma: {
-      buttonText: "Generer ordrefil",
+      buttonText: 'Generer ordrefil',
       icon: vismaAppIcon,
     },
   };

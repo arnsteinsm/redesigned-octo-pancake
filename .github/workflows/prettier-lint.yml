@@ -1,10 +1,10 @@
-name: Check that app dosent have lint warnings or errors
+name: Check that app dosent have lint/prettier warnings or errors
 on:
   pull_request:
     branches:
       - master
 jobs:
-  lint-test:
+  lint-prettier-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,3 +15,5 @@ jobs:
         run: npm ci
       - name: Check that app has no lint warnings or errors
         run: npm run lint
+      - name: Check that app has no prettier errors
+        run: npm run prettier-check

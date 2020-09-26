@@ -1,11 +1,11 @@
-import React from "react";
-import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
+import React from 'react';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 
 interface Props {
   rowId?: string;
   buttonId?: string;
-  variant: "success" | "danger" | "warning";
+  variant: 'success' | 'danger' | 'warning';
   text: string;
   onClick: () => void;
 }

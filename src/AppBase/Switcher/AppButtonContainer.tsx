@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
-import AppButton from "./AppButton";
+import React, { useContext } from 'react';
+import AppButton from './AppButton';
 
-import switcherStyles from "./switcher.module.css";
-import { APP_IDS } from "../../Types";
-import { AuthContext } from "../../Context/AuthProvider";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import switcherStyles from './switcher.module.css';
+import { APP_IDS } from '../../Types';
+import { AuthContext } from '../../Context/AuthProvider';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const AppButtonContainer = () => {
   const { userDataState } = useContext(AuthContext);
