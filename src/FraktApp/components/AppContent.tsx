@@ -30,7 +30,6 @@ const AppContent = () => {
   return (
     <>
       {showOrderNumberInputRow && <OrderNumberInputRow />}
-      <SpinnerRow />
       {showSpinnerRow && <SpinnerRow />}
       {showOrderInfoRow && <OrderInfoRow />}
       {showActionDescriptionRow && <ActionDescriptionRow />}
