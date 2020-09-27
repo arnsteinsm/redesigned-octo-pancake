@@ -15,18 +15,18 @@ const OrderNumberInputRow: React.FunctionComponent = () => {
   const loadOrder = useLoadOrder();
 
   return (
-    <Row id="row1" className="pt-2 mr-1 ml-1">
-      <InputGroup className="mb-3" id="ordreInp">
+    <Row id='row1' className='pt-2 mr-1 ml-1'>
+      <InputGroup className='mb-3' id='ordreInp'>
         <FormControl
-          type="text"
-          placeholder="Legg inn ordrenr"
-          value={state?.inputState?.orderID}
+          type='text'
+          placeholder='Legg inn ordrenr'
+          value={state?.inputState?.orderID || ''}
           onChange={(event) => setOrderId(event.currentTarget.value)}
         />
         <InputGroup.Append>
           <Button
-            variant="outline-success"
-            id="findOrderButton"
+            variant='outline-success'
+            id='findOrderButton'
             onClick={() => loadOrder(state?.inputState?.orderID)}
             disabled={!state?.inputState?.orderID?.length}
           >

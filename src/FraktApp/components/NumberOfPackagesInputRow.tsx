@@ -22,21 +22,21 @@ const NumberOfPackagesInputRow = () => {
   };
 
   return (
-    <Row className="mr-1 ml-1" id="row5">
-      <InputGroup className="mb-3">
+    <Row className='mr-1 ml-1' id='row5'>
+      <InputGroup className='mb-3'>
         <FormControl
-          type="number"
-          id="antallPak"
-          placeholder="Antall kolli"
-          value={state?.inputState?.numberOfPackages}
+          type='number'
+          id='antallPak'
+          placeholder='Antall kolli'
+          value={state?.inputState?.numberOfPackages || ''}
           onChange={(event) =>
             updateNumberOfPackages(parseInt(event.currentTarget.value))
           }
         />
         <InputGroup.Append>
           <Button
-            variant="outline-success"
-            id="submitNumButton"
+            variant='outline-success'
+            id='submitNumButton'
             onClick={showFinalActions}
             disabled={!state?.inputState?.numberOfPackages}
           >
