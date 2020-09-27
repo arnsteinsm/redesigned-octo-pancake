@@ -6,7 +6,9 @@ import admin from 'firebase-admin';
 import winston from 'winston';
 import { Loggly } from 'winston-loggly-bulk';
 
-const cors = require('cors')({ origin: true });
+const cors = require('cors')({
+  origin: [/.*\.hervik\.com$/, 'http://localhost:3000'],
+});
 
 admin.initializeApp(functions.config().firebase);
 
