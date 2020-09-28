@@ -33,6 +33,7 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
           showActionDescriptionRow: false,
           showNumberOfPackagesInputRow: false,
           showActionsRow: false,
+          showResetAppRow: false,
         },
       };
 
