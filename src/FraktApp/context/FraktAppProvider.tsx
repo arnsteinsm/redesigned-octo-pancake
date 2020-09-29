@@ -67,19 +67,6 @@ const appReducer = (state: FraktAppState, action: Action): FraktAppState => {
         actionDescription: '',
       };
 
-    case 'CREATE_SHIPPING_LABEL':
-      return {
-        ...state,
-        visibleComponents: {
-          ...state.visibleComponents,
-          showOrderInfoRow: false,
-          showActionDescriptionRow: false,
-          showActionsRow: false,
-          showOrderNumberInputRow: false,
-          showSpinnerRow: true,
-        },
-      };
-
     case 'SHOW_OTHER_ORDER_STATUS':
       return {
         ...state,
