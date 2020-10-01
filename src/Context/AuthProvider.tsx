@@ -81,10 +81,11 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
   const resetPassword = (email: string) =>
     firebase.auth().sendPasswordResetEmail(email);
 
-  const logOut = () => {
+  const logOut = async () => {
     window.location.pathname = '';
     setLoginStatus('LOGGED_OUT');
-    firebase.auth().signOut();
+    await firebase.auth().signOut();
+    localStorage.clear();
   };
 
   useEffect(() => {

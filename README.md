@@ -1,6 +1,6 @@
 ## Sikkerhet
 
-Ikke legge api-nøkler eller lignende i repoet. Eller i koden som kjøres her. Dette er klientkode og kan sees av alle som besøker appen.
+**Ikke legge api-nøkler eller lignende i repoet. Dette er klientkode og kan sees av alle som besøker appen.Dette gjelder også personer som ikke er logget inn.** For å sikre at uvedkommende ikke får adgang til api-nøkler ligger disse i databasen. Om det skal legges inn nye må også de legges der. De vil da kun være tilgjenglig for brukere som er logget inn via ApiCredentialContext.
 
 
 ## Available Scripts
