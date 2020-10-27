@@ -17,10 +17,14 @@ export const getBringBookingConfig = (
   test?: boolean
 ) => {
   const milliseconds = new Date().getTime() + 60000;
-  const pakketype =
-    orderJson.shipping_lines[0].method_title === 'Servicepakke'
-      ? 'SERVICEPAKKE'
-      : 'PA_DOREN';
+  //get shippingmethod by id
+  const fraktmetode = orderJson.shipping_lines[0].instance_id;
+  const pakketype = (() => {
+    if (fraktmetode === '5' || fraktmetode === '11') return 'SERVICEPAKKE';
+    else if (fraktmetode === '6' || fraktmetode === '12') return 'PA_DOREN';
+    else if (fraktmetode === '13' || fraktmetode === '14')
+      return 'BPAKKE_DOR-DOR';
+  })();
 
   const orderID = String(orderJson.id);
 

@@ -13,7 +13,7 @@ interface Billing extends Address {
 }
 
 interface Shipping_Line {
-  method_title: string;
+  instance_id: string;
 }
 
 interface Line_Items {

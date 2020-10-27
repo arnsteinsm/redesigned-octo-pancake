@@ -102,7 +102,9 @@ const TransferToKlarna: React.FunctionComponent = () => {
         const shipping_info = {
           shipping_company: 'Bring',
           shipping_method:
-            wooShippingLine?.method_title === 'Servicepakke'
+            //get shippingmethod by id
+            wooShippingLine?.instance_id === '5' ||
+            wooShippingLine?.instance_id === '11'
               ? 'PickUpPoint'
               : 'Home',
           tracking_number: wooOrder.meta_data.find(
