@@ -18,12 +18,12 @@ export const getBringBookingConfig = (
 ) => {
   const milliseconds = new Date().getTime() + 60000;
   //get shippingmethod by id
+  //Bring service codes: https://developer.bring.com/api/services/
   const fraktmetode = orderJson.shipping_lines[0].instance_id;
   const pakketype = (() => {
-    if (fraktmetode === '5' || fraktmetode === '11') return 'SERVICEPAKKE';
-    else if (fraktmetode === '6' || fraktmetode === '12') return 'PA_DOREN';
-    else if (fraktmetode === '13' || fraktmetode === '14')
-      return 'BPAKKE_DOR-DOR';
+    if (fraktmetode === '5' || fraktmetode === '11') return '5800';
+    else if (fraktmetode === '6' || fraktmetode === '12') return '5600';
+    else if (fraktmetode === '13' || fraktmetode === '14') return '5000';
   })();
 
   const orderID = String(orderJson.id);

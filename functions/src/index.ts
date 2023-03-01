@@ -37,7 +37,7 @@ exports.getShippingLabel = functions
       const body = req.body;
 
       axios
-        .post('https://api.bring.com/booking/api/booking', body, {
+        .post('https://api.bring.com/booking-api/api/booking', body, {
           headers: {
             'X-MyBring-API-Uid': 'martin@hervik.com',
             'X-MyBring-API-Key': String(key),
