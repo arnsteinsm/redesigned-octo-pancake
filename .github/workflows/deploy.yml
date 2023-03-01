@@ -13,6 +13,11 @@ jobs:
         uses: actions/checkout@master
       - name: Install WebApp Dependencies
         run: npm ci
+      - uses: actions/checkout@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
       - name: Build
         run: npm run build
       - name: Archive Production Artifact
