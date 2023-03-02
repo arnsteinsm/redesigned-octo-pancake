@@ -39,7 +39,7 @@ export const getBringBookingConfig = (
           id: pakketype,
           services: null,
           customsDeclaration: null,
-          customerNumber: 'PARCELS_NORWAY-00001388867',
+          customerNumber: '1388867',
         },
         parties: {
           pickupPoint: null,
