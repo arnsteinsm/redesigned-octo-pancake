@@ -39,9 +39,11 @@ jobs:
       - name: Install Functions Dependencies
         working-directory: ./functions
         run: npm ci
+      - name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
