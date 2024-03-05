@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import SpinnerRow from './SpinnerRow';
 import OrderNumberInputRow from './OrderNumberInputRow';
 import OrderInfoRow from './OrderInfoRow';

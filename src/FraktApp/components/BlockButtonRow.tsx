@@ -18,9 +18,11 @@ const BlockButtonRow: React.FunctionComponent<Props> = ({
   onClick,
 }) => (
   <Row className="mr-1 ml-1 mt-2" id={rowId}>
-    <Button id={buttonId} variant={variant} onClick={onClick} block>
-      {text}
-    </Button>
+    <div className="d-grid gap-2">
+      <Button id={buttonId} variant={variant} onClick={onClick}>
+        {text}
+      </Button>
+    </div>
   </Row>
 );
 

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import AppContainer from './components/AppContainer';
 import AppProvider from './context/FraktAppProvider';

@@ -1,5 +1,5 @@
 import Row from 'react-bootstrap/Row';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -33,16 +33,14 @@ const NumberOfPackagesInputRow = () => {
             updateNumberOfPackages(parseInt(event.currentTarget.value))
           }
         />
-        <InputGroup.Append>
-          <Button
-            variant="outline-success"
-            id="submitNumButton"
-            onClick={showFinalActions}
-            disabled={!state?.inputState?.numberOfPackages}
-          >
-            Bekreft
-          </Button>
-        </InputGroup.Append>
+        <Button
+          variant="outline-success"
+          id="submitNumButton"
+          onClick={showFinalActions}
+          disabled={!state?.inputState?.numberOfPackages}
+        >
+          Bekreft
+        </Button>
       </InputGroup>
     </Row>
   );

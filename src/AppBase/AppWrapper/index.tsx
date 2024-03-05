@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Menubar from './Menubar';
 
-const AppWrapper: React.FunctionComponent = ({ children }) => {
+interface AppWrapperProps {
+  children: ReactNode;
+}
+
+const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   return (
     <>
       <Menubar />
-
       <>{children}</>
     </>
   );

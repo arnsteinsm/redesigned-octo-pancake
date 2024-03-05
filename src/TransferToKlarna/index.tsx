@@ -8,10 +8,10 @@ import React, {
 import { ApiCredentialsContext } from '../Context/ApiCredentialsProvider';
 import { makeQuery } from '../commonUtils';
 import { OrderInfo } from '../Types/order';
-import Button from '@material-ui/core/Button';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { useHistory } from 'react-router-dom';
-import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
+import { useNavigate } from 'react-router-dom';
+import DialogActions from '@mui/material/DialogActions';
 import useFetchers from '../hooks/useFetchers';
 import { logError } from '../winston';
 import axios from 'axios';
@@ -28,7 +28,7 @@ const TransferToKlarna: React.FunctionComponent = () => {
 
   const { updateOrder } = useFetchers();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const fetchPackedOrders = useCallback(async () => {
     const wordpressProcessingQuery = makeQuery({
@@ -55,7 +55,7 @@ const TransferToKlarna: React.FunctionComponent = () => {
 
   const closeAction = (
     <DialogActions>
-      <Button onClick={() => history.push('/authed')} color="primary">
+      <Button onClick={() => navigate('/authed')} color="primary">
         Lukk
       </Button>
     </DialogActions>

@@ -1,10 +1,11 @@
-import React from 'react';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
+import React, { ReactNode } from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
 
 interface Props {
   open: boolean;
+  children?: ReactNode;
 }
 
 const ActionDialog: React.FunctionComponent<Props> = ({ open, children }) => {

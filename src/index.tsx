@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
@@ -9,18 +8,20 @@ import LogRocket from 'logrocket';
 
 LogRocket.init('7cayg5/hervik-dash');
 
-ReactDOM.render(
+// Create a root.
+const container = document.getElementById('root');
+const root = createRoot(container!); // Use the non-null assertion operator here.
+
+// Render the app within the root.
+root.render(
   <BrowserRouter>
     <AuthProvider>
       <ApiCredentialsProvider>
         <App />
       </ApiCredentialsProvider>
     </AuthProvider>
-  </BrowserRouter>,
-  document.getElementById('root')
+  </BrowserRouter>
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+// Service worker logic remains unchanged
 serviceWorker.unregister();

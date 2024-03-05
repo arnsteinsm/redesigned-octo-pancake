@@ -1,22 +1,17 @@
-import React from 'react';
+// App.js
 import './App.css';
 import AppWrapper from './AppBase/AppWrapper';
-
-import { Switch, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Login from './AppBase/Login/Login';
 import AuthedRoutes from './AppBase/AuthedRoutes';
 
 const App = () => {
   return (
     <AppWrapper>
-      <Switch>
-        <Route path="/authed">
-          <AuthedRoutes />
-        </Route>
-        <Route path="/">
-          <Login />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/authed/*" element={<AuthedRoutes />} />
+        <Route path="/" element={<Login />} />
+      </Routes>
     </AppWrapper>
   );
 };

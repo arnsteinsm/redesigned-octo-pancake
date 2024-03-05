@@ -1,10 +1,10 @@
 import React, { useRef, useEffect } from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import FormHelperText from '@mui/material/FormHelperText';
 
 import loginStyles from './Login.module.css';
 
@@ -30,51 +30,52 @@ const InputComponent: React.FunctionComponent<Props> = ({
   disabled,
 }) => {
   const inputId = `${inputType}_login_input`;
-  const currentInput = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
+  // Automatically focus the input field when the component mounts
   useEffect(() => {
-    if (currentInput.current) {
-      currentInput.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
-  }, [currentInput]);
+  }, []);
 
   return (
     <span className={loginStyles.loginInputWrapper}>
-      <FormControl variant="outlined" className={loginStyles.loginInput}>
-        <InputLabel htmlFor="outlined-adornment-password">{label}</InputLabel>
+      <FormControl
+        variant="outlined"
+        className={loginStyles.loginInput}
+        error={!!errorText}
+      >
+        <InputLabel htmlFor={inputId}>{label}</InputLabel>
         <OutlinedInput
           id={inputId}
-          inputRef={currentInput}
-          error={!!errorText}
           type={inputType}
           value={value}
           onChange={onChange}
-          onKeyUp={(e) => {
-            if (e.keyCode === 13) {
-              onClick();
-            }
-          }}
+          label={label} // This should match the text in InputLabel for proper alignment
+          inputRef={inputRef}
+          onKeyUp={(e) => e.key === 'Enter' && onClick()}
           endAdornment={
+            icon &&
             !disabled && (
               <InputAdornment position="end">
                 <IconButton
-                  disabled={disabled}
-                  aria-label="toggle password visibility"
-                  edge="end"
+                  aria-label={`toggle ${inputType} visibility`}
                   onClick={onClick}
+                  edge="end"
+                  disabled={disabled}
                 >
                   {icon}
                 </IconButton>
               </InputAdornment>
             )
           }
-          labelWidth={70}
+          disabled={disabled}
         />
-        <FormHelperText disabled={disabled} error={!!errorText}>
-          {errorText}
-        </FormHelperText>
+        <FormHelperText>{errorText}</FormHelperText>
       </FormControl>
     </span>
   );
 };
+
 export default InputComponent;

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import { FraktAppContext } from '../context/FraktAppProvider';
 

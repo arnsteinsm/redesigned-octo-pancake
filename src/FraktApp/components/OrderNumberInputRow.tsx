@@ -23,16 +23,14 @@ const OrderNumberInputRow: React.FunctionComponent = () => {
           value={state?.inputState?.orderID || ''}
           onChange={(event) => setOrderId(event.currentTarget.value)}
         />
-        <InputGroup.Append>
-          <Button
-            variant="outline-success"
-            id="findOrderButton"
-            onClick={() => loadOrder(state?.inputState?.orderID)}
-            disabled={!state?.inputState?.orderID?.length}
-          >
-            Finn ordre!
-          </Button>
-        </InputGroup.Append>
+        <Button
+          variant="outline-success"
+          id="findOrderButton"
+          onClick={() => loadOrder(state?.inputState?.orderID)}
+          disabled={!state?.inputState?.orderID?.length}
+        >
+          Finn ordre!
+        </Button>
       </InputGroup>
     </Row>
   );

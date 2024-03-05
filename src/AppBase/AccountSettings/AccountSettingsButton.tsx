@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import accountSettingsStyle from './accountSettings.module.css';
 import AccountSettingsDialog from './AccountSettingsDialog';

@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import appWrapperStyles from './appWrapper.module.css';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@mui/material/IconButton';
 import { AuthContext } from '../../Context/AuthProvider';
 
 interface Props {
   route: string;
   shouldLogOut?: boolean;
+  children?: React.ReactNode;
 }
 
 const MenubarButton: React.FunctionComponent<Props> = ({
@@ -15,7 +16,7 @@ const MenubarButton: React.FunctionComponent<Props> = ({
   route,
   shouldLogOut,
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
   return (
     <IconButton
@@ -26,7 +27,7 @@ const MenubarButton: React.FunctionComponent<Props> = ({
         if (shouldLogOut) {
           logOut();
         }
-        history.push(route);
+        navigate(route);
       }}
       className={appWrapperStyles.iconButton}
     >

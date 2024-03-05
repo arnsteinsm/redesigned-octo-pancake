@@ -1,13 +1,23 @@
-import React, { createContext, useState, useEffect } from 'react';
-import firebase from '../firebase';
+import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { UserData } from '../Types';
-import { useHistory } from 'react-router-dom';
+
+// Import necessary Firebase functions at the top level
+import { auth, db } from '../firebase';
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
+} from 'firebase/auth';
+import { ref, get } from 'firebase/database';
 
 type LoginStatuses = 'LOGGED_IN' | 'LOGGED_OUT';
 
 interface AuthContextType {
   loginEmail: (email: string) => void;
-  login: (user: string, passord: string) => void;
+  login: (user: string, password: string) => void;
   logOut: () => void;
   resetPassword: (email: string) => void;
   userDataState: UserData | null;
@@ -21,119 +31,116 @@ export const AuthContext = createContext<AuthContextType>(
   {} as AuthContextType
 );
 
-const AuthProvider: React.FunctionComponent = ({ children }) => {
-  const history = useHistory();
+interface AuthProviderProps {
+  children?: ReactNode;
+}
 
-  const [loginStatus, setLoginStatus] = useState<LoginStatuses>();
-
+const AuthProvider: React.FunctionComponent<AuthProviderProps> = ({
+  children,
+}) => {
+  const navigate = useNavigate();
+  const [loginStatus, setLoginStatus] = useState<LoginStatuses>('LOGGED_OUT');
   const [userDataState, setUserDataState] = useState<UserData | null>(null);
-
   const [emailChecked, setEmailChecked] = useState(false);
   const [emailUserExists, setEmailUserExists] = useState(false);
   const [errorText, setErrorText] = useState('');
 
   const loginEmail = (email: string) => {
+    // Now using fetchSignInMethodsForEmail directly without import inside the function
     if (email.length) {
-      firebase
-        .auth()
-        .fetchSignInMethodsForEmail(email)
+      fetchSignInMethodsForEmail(auth, email)
         .then((methods) => {
-          if (methods.length) {
-            setErrorText('');
-            setEmailUserExists(true);
-          }
+          setEmailUserExists(methods.length > 0);
+          setErrorText('');
         })
-        .finally(() => {
-          setEmailChecked(true);
+        .catch((error) => {
+          console.error(error);
+          setErrorText(
+            'Noe gikk galt under sjekk av e-postadresse. Prøv igjen.'
+          );
         })
-        .catch((e) => {
-          if (e.code === 'auth/invalid-email') {
-            setErrorText('Ingen bruker for valgt e-post');
-          }
-        });
+        .finally(() => setEmailChecked(true));
     } else {
-      setErrorText('Legg inn e-post');
+      setErrorText('Vennligst skriv inn en e-postadresse.');
     }
   };
 
   const login = (user: string, password: string) => {
-    if (user && password) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(user, password)
-        .then(() => {
-          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-        })
-        .catch((e) => {
-          if (e.code === 'auth/wrong-password') {
-            setErrorText('Feil passord');
-          } else if (e.code === 'auth/too-many-requests') {
-            setErrorText(
-              'Du har tastet feil passord for mange ganger, prøv igjen senere.'
-            );
-          }
-        });
-    } else {
-      window.alert('Legg inn brukernavn og passord');
-    }
+    signInWithEmailAndPassword(auth, user, password)
+      .then(() => {
+        setLoginStatus('LOGGED_IN');
+        navigate('/authed');
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrorText('Noe gikk galt under innlogging. Prøv igjen.');
+      });
   };
 
-  const resetPassword = (email: string) =>
-    firebase.auth().sendPasswordResetEmail(email);
+  const resetPassword = (email: string) => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert('Mail for å sette nytt passord er sendt. Sjekk e-posten din.');
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrorText(
+          'Noe gikk galt under sending av e-post for å sette nytt passord.'
+        );
+      });
+  };
 
-  const logOut = async () => {
-    window.location.pathname = '';
-    setLoginStatus('LOGGED_OUT');
-    await firebase.auth().signOut();
-    localStorage.clear();
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        setLoginStatus('LOGGED_OUT');
+        setUserDataState(null);
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrorText('Noe gikk galt under utlogging. Prøv igjen.');
+      });
   };
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        let current = firebase.auth().currentUser;
-        if (current) {
-          //Brukere
-          let userData = firebase.database().ref(`users/${current.uid}`);
-
-          userData
-            .once('value')
-            .then((snapshot) => {
-              //Håndterer brukere
-              const data = snapshot.val() as UserData | undefined; // null
-              setUserDataState(data || null);
-            })
-            .then(() => {
-              setLoginStatus('LOGGED_IN');
-              if (window.location.pathname.length <= 1) {
-                history.push('/authed');
-              }
-            })
-            .catch((e) => {
-              console.log(e);
-            });
-        }
+        const userRef = ref(db, `users/${user.uid}`);
+        get(userRef).then((snapshot) => {
+          setUserDataState(snapshot.val() || null);
+          setLoginStatus('LOGGED_IN');
+          if (window.location.pathname === '/') {
+            navigate('/authed');
+          }
+        });
       } else {
+        setLoginStatus('LOGGED_OUT');
         setUserDataState(null);
-        history.push('/');
+        navigate('/');
       }
     });
-  }, [history]);
 
-  const context = {
-    loginEmail,
-    login,
-    logOut,
-    resetPassword,
-    loginStatus,
-    userDataState,
-    emailChecked,
-    emailUserExists,
-    errorText,
-  };
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [navigate]);
 
   return (
-    <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        loginEmail,
+        login,
+        logOut,
+        resetPassword,
+        userDataState,
+        loginStatus,
+        emailChecked,
+        emailUserExists,
+        errorText,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 };
 

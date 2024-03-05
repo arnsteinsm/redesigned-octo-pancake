@@ -1,5 +1,3 @@
-import React from 'react';
-
 import switcherStyles from './switcher.module.css';
 
 import hervikBjorn from '../../Media/hervik-bjørn.png';

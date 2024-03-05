@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 
 import { AuthContext } from '../../Context/AuthProvider';
-import RightArrow from '@material-ui/icons/KeyboardArrowRightRounded';
+import RightArrow from '@mui/icons-material/KeyboardArrowRightRounded';
 
 import loginStyles from './Login.module.css';
 import InputComponent from './InputComponent';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 type InputOnchangeEvent = React.ChangeEvent<HTMLInputElement>;
 

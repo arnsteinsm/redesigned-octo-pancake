@@ -80,6 +80,7 @@ const useGenerateShippingLabel = () => {
         resetApp();
       })
       .catch((err) => {
+        console.error(err);
         window.alert(
           'Noe gikk galt under opplasting av pakkelapper til nettbutikken. Dette er ikke kritisk. Meldingskode:3'
         );

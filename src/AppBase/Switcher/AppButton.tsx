@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate and useLocation
 import switcherStyles from './switcher.module.css';
 import { AppButtonConfig, APP_IDS } from '../../Types';
 
 import postenAppIcon from '../../Media/AppIcons/posten.png';
 import klarnaAppIcon from '../../Media/AppIcons/klarna.png';
 import vismaAppIcon from '../../Media/AppIcons/visma.png';
-import { useHistory, useRouteMatch } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 interface Props {
@@ -14,10 +14,8 @@ interface Props {
 
 const AppButton: React.FunctionComponent<Props> = ({ appId }) => {
   const { userDataState } = useContext(AuthContext);
-
-  const history = useHistory();
-
-  const match = useRouteMatch();
+  const navigate = useNavigate(); // Use useNavigate for navigation
+  const location = useLocation(); // Use useLocation to access the current location
 
   const appButtonConfig: Record<APP_IDS, AppButtonConfig> = {
     posten: {
@@ -44,7 +42,8 @@ const AppButton: React.FunctionComponent<Props> = ({ appId }) => {
         src={appButtonConfig[appId].icon}
         disabled={!userDataState?.privileges[appId]}
         onClick={() => {
-          history.push(match.path + `/${appId}`);
+          // Use navigate to construct the navigation path
+          navigate(`${location.pathname}/${appId}`);
         }}
       />
       <label className={switcherStyles.iconButtonLabel} htmlFor={appId}>
