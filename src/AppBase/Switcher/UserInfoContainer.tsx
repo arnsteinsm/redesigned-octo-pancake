@@ -14,7 +14,7 @@ const UserInfoContainer = () => {
         />
       </div>
       <div className={switcherStyles.flexRow}>
-        <h1 className={switcherStyles.profileText}>Hervik's verktøykasse</h1>
+        <h1 className={switcherStyles.profileText}>Herviks verktøykasse</h1>
       </div>
       <div className={switcherStyles.flexRow}>
         <AccountSettingsButton />

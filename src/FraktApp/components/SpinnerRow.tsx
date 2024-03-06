@@ -4,13 +4,20 @@ import CircularProgress from '@mui/material/CircularProgress';
 const SpinnerRow = () => (
   <Row
     id="spinnerArea"
-    className="mr-1 ml-1 mt-4"
     style={{
       display: 'flex',
       justifyContent: 'center',
     }}
   >
-    <CircularProgress size={100} thickness={4} />
+    <CircularProgress
+      color="success"
+      size={60}
+      thickness={2}
+      style={{
+        padding: '0',
+        marginTop: '40px',
+      }}
+    />
   </Row>
 );
 
