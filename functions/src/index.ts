@@ -7,7 +7,11 @@ import winston from 'winston';
 import { Loggly } from 'winston-loggly-bulk';
 
 const cors = require('cors')({
-  origin: [/.*\.hervik\.com$/, 'http://localhost:3000'],
+  origin: [
+    /.*\.hervik\.com$/,
+    'http://localhost:3000',
+    /https?:\/\/.*hervik-.*\.web\.app$/,
+  ],
 });
 
 admin.initializeApp(functions.config().firebase);
