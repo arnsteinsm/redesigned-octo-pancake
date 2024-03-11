@@ -9,7 +9,7 @@ import { Loggly } from 'winston-loggly-bulk';
 const cors = require('cors')({
   origin: [
     /.*\.hervik\.com$/,
-    'http://localhost:3000',
+    /^http:\/\/localhost(:\d+)?$/,
     /https?:\/\/.*hervik-.*\.web\.app$/,
   ],
 });
